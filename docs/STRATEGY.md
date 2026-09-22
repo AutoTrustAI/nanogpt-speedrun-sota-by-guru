@@ -1,14 +1,14 @@
 # ForgeMatch strategy
 
-ForgeMatch combines the ANVIL2 trainer with exact-match retrieval from training data. Retrieval adds predictive information, which lets a shorter neural training schedule reach the speedrun's loss threshold. Systems changes then reduce overhead and timing variation. The name covers this integration and measured configuration; component authorship is recorded in [CREDITS.md](../CREDITS.md).
+ForgeMatch uses causal prefix retrieval, sparse n-gram embeddings, FP8 execution, and a compact training schedule to reach the NanoGPT speedrun's loss target. Retrieved continuation features provide predictive information at three points in the network. Asynchronous data movement and coordinated CPU/GPU execution reduce overhead and timing variation.
 
 ## Learning method
 
-The ANVIL2 foundation supplies its attention, sparse n-gram embeddings, sampled-softmax training path, optimizers, FP8 machinery, and CUDA graph execution. Validation remains full vocabulary.
+The training path uses mixed-width attention, sparse n-gram embeddings, sampled softmax, FP8 computation, and CUDA graph execution. Its optimizer updates and learning-rate schedule are arranged around the changing batch and sequence lengths. Validation remains full vocabulary.
 
-The exact-match component searches training prefixes with a minimum context of 8 and maximum of 512 tokens. Its candidate continuations and match lengths become learned retrieval vectors, injected at the input, middle, and output of the network. It is part of the learned prediction method, not merely a data-loading optimization. See [`retrieval.py`](../model/retrieval.py), [`train_gpt.py`](../model/train_gpt.py), and the [Rust implementation](../model/exact_match/src/lib.rs).
+The retrieval index searches training prefixes with a minimum context of 8 and maximum of 512 tokens. Its candidate continuations and match lengths become learned retrieval vectors, injected at the input, middle, and output of the network. It is part of the learned prediction method, not merely a data-loading optimization. See [`retrieval.py`](../model/retrieval.py), [`train_gpt.py`](../model/train_gpt.py), and the [Rust implementation](../model/exact_match/src/lib.rs).
 
-During training, all microbatches in one optimizer step query before any tokens from that step are inserted into the online index. The integration preserves real document boundaries before attention-window splitting. During validation, each rank indexes a partition of all **103 training shards** and queries causal validation prefixes. Cross-rank merging selects the top two distinct continuations using match length, shard-local count, and token identity. The validation targets are not inserted into the index. Full-corpus retrieval sees substantially more training data than the shortened neural training loop consumes; this must be disclosed as part of the method.
+During training, all microbatches in one optimizer step query before any tokens from that step are inserted into the online index. The loader preserves real document boundaries before attention-window splitting. During validation, each rank indexes a partition of all **103 training shards** and queries causal validation prefixes. Cross-rank merging selects the top two distinct continuations using match length, shard-local count, and token identity. The validation targets are not inserted into the index. Full-corpus retrieval sees substantially more training data than the shortened neural training loop consumes; this must be disclosed as part of the method.
 
 `HYBRID_TOTAL_STEPS=652` rescales the training schedule rather than simply truncating the last four steps of the 656-step run. The stage boundaries change from **0/167/354/601/636/656** to **0/166/352/597/632/652**. The 652-step schedule consumes **180,944,896 neural input tokens**, versus **182,124,544** at 656 steps. This is a learning change, so it received its own complete five-seed evaluation.
 
@@ -61,3 +61,5 @@ Our original-source same-machine reproductions each used **one seed42 run**, as 
 A single reference run does not establish the reference mean or variance. These measurements support the approximate performance scale, but are not a new interleaved, multi-run official baseline comparison.
 
 For execution details, see [Reproduce](REPRODUCE.md). For exact result rows and evidence coverage, see [Evidence](EVIDENCE.md).
+
+[Source attribution and acknowledgments](../CREDITS.md) · [MIT license](../LICENSE)

@@ -13,7 +13,7 @@ Our additional local requirement is stricter than a mean-loss gate: **each** of 
 ## Data and causal validation
 
 - The data files retain the official token streams; all 104 files were hash-checked during data preparation.
-- Validation uses the full target token count and full vocabulary. Sampled softmax is used during ANVIL2 training, not to narrow the validation vocabulary.
+- Validation uses the full target token count and full vocabulary. Sampled softmax is used during training, not to narrow the validation vocabulary.
 - Online retrieval queries every microbatch of a training step before inserting that step's tokens.
 - Offline retrieval is built from **all 103 training shards**. Validation queries use causal prefixes; validation targets are not inserted into the retrieval index, and validation performs no backward updates.
 - The neural training loop consumes only part of the corpus. The broader retrieval corpus is therefore an explicit part of the learning method, not a pure systems optimization.
@@ -45,7 +45,7 @@ The archived review found no added compile tuning flags or unreset warmup learni
 
 ## Upstream status at the review snapshot
 
-- [ANVIL2 PR #360](https://github.com/KellerJordan/modded-nanogpt/pull/360) was open. The [maintainer's comment](https://github.com/KellerJordan/modded-nanogpt/pull/360#issuecomment-5565930470) supported the described methods' legitimacy while requiring their own reproduction before acceptance. It does not approve the ForgeMatch hybrid.
+- [ANVIL2 PR #360](https://github.com/KellerJordan/modded-nanogpt/pull/360) was open. The [maintainer's comment](https://github.com/KellerJordan/modded-nanogpt/pull/360#issuecomment-5565930470) supported the described methods' legitimacy while requiring their own reproduction before acceptance. It does not approve the ForgeMatch configuration.
 - [Exact-match PR #367](https://github.com/KellerJordan/modded-nanogpt/pull/367) was open, with no reviews displayed in the archived check.
 - No ForgeMatch submission or official acceptance is established by this repository.
 

@@ -1,14 +1,14 @@
 # ForgeMatch · 铸忆
 
-**ANVIL2 training meets exact-match memory: 24.8998 seconds on 8× H100, verified across five seeds.**
+**ScienceGuru + Guru Turbo 1.2 · 24.8998 seconds on 8× H100, verified across five seeds.**
 
-[中文](README.zh-CN.md) · [Reproduce](docs/REPRODUCE.md) · [Strategy](docs/STRATEGY.md) · [Evidence](docs/EVIDENCE.md) · [Rules and limitations](docs/COMPLIANCE.md)
+[中文](README.zh-CN.md) · [Reproduce](docs/REPRODUCE.md) · [Strategy](docs/STRATEGY.md) · [Evidence](docs/EVIDENCE.md) · [Research baselines](docs/BASELINES.md) · [Rules and limitations](docs/COMPLIANCE.md)
 
-ForgeMatch combines ANVIL2's training system with exact-match retrieval, then tunes the training schedule and CPU/GPU coordination for the NanoGPT speedrun. **Forge** acknowledges the ANVIL lineage; **Match** describes retrieval from matching training prefixes. The Chinese name **铸忆** means forging memory. This is AutoTrust-AI's name for the integration and optimization work; the underlying contributions are credited in [CREDITS.md](CREDITS.md).
+ForgeMatch trains a language model with causal prefix retrieval, sparse n-gram embeddings, FP8 execution, and a compact training schedule. CPU affinity, asynchronous prefetching, and coordinated memory management keep the GPUs supplied with data and reduce timing variation.
 
 ## Verified result
 
-The 652-step cohort uses five fixed seeds, with every run included. All five final validation losses are below **3.28**, measured on the complete **10,485,760-token** validation target with full-vocabulary probabilities.
+**ScienceGuru + Guru Turbo 1.2** produced this 652-step result across five fixed seeds, with every run included. All five final validation losses are below **3.28**, measured on the complete **10,485,760-token** validation target with full-vocabulary probabilities.
 
 | Seed | Final `train_time` (s) | Validation loss |
 |---:|---:|---:|
@@ -26,7 +26,7 @@ The 652-step cohort uses five fixed seeds, with every run included. All five fin
 
 These are measured benchmark-section times, **not full process wall times**. Compilation, warmup, and final model validation are excluded by the inherited timing convention. Content-dependent retrieval construction and required completion work remain inside the clock. See the [timing disclosure](docs/COMPLIANCE.md#timing-boundary).
 
-The independently audited result is a local experimental result, **not an officially accepted world record**. Fixed seeds were used during adaptive development; the nominal t-test does not remove that statistical limitation. See [machine-readable results](results/cohorts.json) and the [evidence guide](docs/EVIDENCE.md).
+The evidence-verified result is a local experimental result, **not an officially accepted world record**. Fixed seeds were used during adaptive development; the nominal t-test does not remove that statistical limitation. See [machine-readable results](results/cohorts.json) and the [evidence guide](docs/EVIDENCE.md).
 
 ## Comparison with public strategies
 
@@ -37,6 +37,26 @@ The independently audited result is a local experimental result, **not an offici
 | **ForgeMatch, 652 steps** | **24.8998 s** | **3.27498** | **5** | — |
 
 The public results use different machines and sample counts. These are comparisons at the same **loss ≤3.28 threshold**, not matched-loss or controlled same-machine speedups: Exact-match retains a larger quality margin. ANVIL2's published 18-run summary includes one run whose raw log was lost, as its authors disclose. The sources and our single-seed same-machine reproductions are explained in [Strategy](docs/STRATEGY.md#comparisons).
+
+## Research-group baselines
+
+Verified on **2026-09-23**. These are historical public results associated with identifiable research groups, on the 8×H100 / FineWeb loss ≤3.28 task. They are not a ranking of the groups' current capabilities. Approximate seconds marked below are conversions from rounded official leaderboard minutes.
+
+| Research affiliation | Method | Public time | Evidence status |
+|---|---|---:|---|
+| Google + Google DeepMind, UW–Madison, UC San Diego | [PACEvolve](https://arxiv.org/pdf/2601.10657v3) | **140.2 s** | Paper experiment from version 40; 142.8 → 140.2 s; no accepted record located |
+| Georgia Tech + Microsoft | [NorMuon](https://github.com/KellerJordan/modded-nanogpt/pull/144) | **≈140.70 s** | Official historical record #41, 2.345 min |
+| Stanford-associated Enigma project | [Faster gradient all-reduce](https://github.com/KellerJordan/modded-nanogpt#world-record-history) | **≈179.40 s** | Official historical record #22, 2.990 min |
+| Recursive | [ReLU² kernel contribution](https://github.com/KellerJordan/modded-nanogpt/pull/322) | **≈75.36 s** | Official historical record #87, 1.256 min; only part of the original submission was integrated |
+| Hyperstition, formerly Social Physics Lab | [ANVIL2](https://github.com/KellerJordan/modded-nanogpt/pull/360) | **39.914 s** | Public 18-run mean; PR still open |
+
+Affiliation evidence, dates, original submission versus accepted-record distinctions, and separate optimizer-track results for OpenAI/Anthropic models are in [Research baselines](docs/BASELINES.md).
+
+## What this benchmark establishes
+
+NanoGPT Speedrun measures **time to a fixed language-modeling quality target**. It exercises training algorithms, model architecture, GPU kernels, distributed communication, data movement, and reproducible experimentation. Its research value includes exposing useful optimization ideas and providing an open task for evaluating autonomous research systems; Google/DeepMind, METR, and Prime Intellect have used it for this purpose. See [benchmark significance and scope](docs/BASELINES.md#benchmark-significance-and-scope).
+
+The result applies to this workload and protocol. It does not establish frontier-model capability, inference speed, total research cost, or general superiority over another laboratory. ForgeMatch builds on newer community work than several historical baselines above and still needs official acceptance.
 
 ## What is included
 
@@ -50,4 +70,4 @@ The reference hardware is **8× H100 80GB HBM3**, two Xeon Platinum 8481C CPUs, 
 
 ## Credits and license
 
-Built on [Keller Jordan's modded-nanogpt](https://github.com/KellerJordan/modded-nanogpt), [Deven Pietrzak's ANVIL2](https://github.com/KellerJordan/modded-nanogpt/pull/360), and [hermabr's exact-match retrieval](https://github.com/KellerJordan/modded-nanogpt/pull/367), with the many upstream contributors they build upon. See [CREDITS.md](CREDITS.md) and [LICENSE](LICENSE).
+[Source attribution and acknowledgments](CREDITS.md) · [MIT license](LICENSE)

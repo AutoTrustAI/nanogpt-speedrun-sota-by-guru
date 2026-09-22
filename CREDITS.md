@@ -1,6 +1,6 @@
 # Credits and provenance
 
-ForgeMatch（铸忆） is AutoTrust-AI's name for this integration, schedule tuning, systems optimization, and experiment record. It builds directly on the following public work.
+**ScienceGuru + Guru Turbo 1.2 · ForgeMatch experiment results.** This file records source authorship and license provenance.
 
 | Contribution | Author / project | Reference |
 |---|---|---|
@@ -13,7 +13,7 @@ The Exact-match published 47.2056-second report identifies training source commi
 
 Additional foundations include PyTorch, Triton, FlashAttention, the `kernels` ecosystem, Rust/PyO3, Hugging Face, FineWeb, and the many prior speedrun contributors. The inherited [model README](model/README.md) preserves the upstream contributor history, but its historical run instructions do not describe the ForgeMatch reproduction recipe.
 
-Our integration adapts retrieval to the ANVIL loader, optimizer, and graph buffers; tunes the shorter training schedule; applies CPU affinity, deferred CUDA waiting, coordinated index release, and pageable raw-shard allocation; and records complete fixed-seed evidence. These changes do not transfer authorship of upstream methods or imply upstream endorsement.
+The measured configuration uses causal retrieval, a shorter training schedule, CPU affinity, deferred CUDA waiting, coordinated index release, and pageable raw-shard allocation, with complete fixed-seed evidence. Component authorship remains as credited above; project attribution does not imply endorsement by those authors.
 
 The archived experiment source is commit `d7b6a09512010189292974b3a9b9f19c111d9b38`, with parent `7f6f968dea96b9c5219affc4b6c0a678cf1d57c0`. The packaged 33 source files are byte-identical to that snapshot and pinned in [provenance/source-files.json](provenance/source-files.json). This packaging repository has its own Git history.
 

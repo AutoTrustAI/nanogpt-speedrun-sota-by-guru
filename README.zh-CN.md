@@ -1,14 +1,14 @@
 # ForgeMatch · 铸忆
 
-**ANVIL2 训练系统与 exact-match 记忆检索融合：8×H100 上，五个 seed 平均 24.8998 秒。**
+**ScienceGuru + Guru Turbo 1.2 · 8×H100 上，五个 seed 平均 24.8998 秒。**
 
-[English](README.md) · [复现指南](docs/REPRODUCE.md) · [策略说明](docs/STRATEGY.md) · [证据说明](docs/EVIDENCE.md) · [规则与边界](docs/COMPLIANCE.md)
+[English](README.md) · [复现指南](docs/REPRODUCE.md) · [策略说明](docs/STRATEGY.md) · [证据说明](docs/EVIDENCE.md) · [实验室 baseline](docs/BASELINES.md) · [规则与边界](docs/COMPLIANCE.md)
 
-**ForgeMatch** 是 AutoTrust-AI 对这套融合与优化策略的命名：**Forge** 呼应 ANVIL 的锻造意象，**Match** 指向训练前缀的精确匹配；中文名 **铸忆**，意为“把记忆铸入模型”。底层训练算法和检索方法来自公开贡献，详见[致谢](CREDITS.md)。
+**ForgeMatch** 是面向 NanoGPT Speedrun 的快速语言模型训练方案。它利用训练语料的因果前缀检索、稀疏 n-gram embedding、FP8 计算和紧凑训练日程提高训练效率，并通过 CPU 绑核、异步预取与协调内存管理减少 GPU 等待和时间波动。
 
 ## 已核验成绩
 
-652 步、固定五个 seed，完整验证集 **10,485,760 tokens**，全词表概率计算。五次完整运行的最终 loss 均低于 **3.28**。
+由 **ScienceGuru + Guru Turbo 1.2** 跑出的 652 步方案，采用固定五个 seed，完整验证集 **10,485,760 tokens**，全词表概率计算。五次完整运行的最终 loss 均低于 **3.28**。
 
 | Seed | 最终训练计时（秒） | 验证 loss |
 |---:|---:|---:|
@@ -38,12 +38,42 @@
 
 以上对齐的是 **loss≤3.28 门槛**，实际 loss、机器和样本数不同，不能解释为同 loss 或同机受控对照的提升。Exact-match 的质量余量更大；ANVIL2 作者披露其 18 次统计中有一次原始日志遗失。我们此前也完成了两种原策略的同机单 seed 复现，详见[比较口径](docs/STRATEGY.md#comparisons)。
 
+## 知名机构及研究团队的公开 baseline
+
+核查日期：**2026-09-23**。以下均涉及 **8×H100、FineWeb loss≤3.28** 的训练计时任务；包含历史纪录和论文实验，不代表这些机构当前的最优能力。标有“约”的秒数由官方榜单的分钟数换算。
+
+| 机构关联 | 策略 | 公开耗时 | 成绩性质 |
+|---|---|---:|---|
+| Google + Google DeepMind、威斯康星大学麦迪逊分校、UC San Diego | [PACEvolve](https://arxiv.org/pdf/2601.10657v3) | **140.2 秒** | 论文实验：旧 v40 基线 142.8→140.2 秒；未找到正式上榜证据 |
+| Georgia Tech + Microsoft | [NorMuon](https://github.com/KellerJordan/modded-nanogpt/pull/144) | **约 140.70 秒** | 已接受的历史纪录 #41，2.345 分钟 |
+| Stanford 关联的 Enigma 项目 | [梯度 all-reduce 优化](https://github.com/KellerJordan/modded-nanogpt#world-record-history) | **约 179.40 秒** | 已接受的历史纪录 #22，2.990 分钟 |
+| Recursive | [ReLU² kernel 优化](https://github.com/KellerJordan/modded-nanogpt/pull/322) | **约 75.36 秒** | 已接受的历史纪录 #87，1.256 分钟；原提交仅部分改动被采纳 |
+| Hyperstition，原 Social Physics Lab | [ANVIL2](https://github.com/KellerJordan/modded-nanogpt/pull/360) | **39.914 秒** | 18 次公开均值；PR 尚未合并 |
+
+机构归属证据、日期与原始来源详见 [baseline 文档](docs/BASELINES.md)。ANVIL2 作者的 MIT 教育背景不能将该成绩变成“MIT 实验室纪录”；Stanford 学生个人提交也不能直接归给 Stanford 实验室。
+
+## 重要程度与考察内容
+
+**它在小型语言模型训练效率、GPU 系统优化和自动化研究评估中具有较高参考价值。** 任务开放、质量目标固定，改动可追溯到源码和日志，适合反复验证优化思路。Google/DeepMind 的 PACEvolve、METR 和 Prime Intellect 都将它用于研究评估。Muon 系列展示了部分优化思想向更大模型迁移的价值，但每项 speedrun 技巧仍需分别验证可扩展性。[相关研究与边界](docs/BASELINES.md#benchmark-significance-and-scope)
+
+| 考察维度 | 具体内容 |
+|---|---|
+| 收敛效率 | 优化器、学习率、初始化、训练日程，能否用更少更新达到指定 loss |
+| 模型与目标设计 | 注意力、残差、embedding、辅助预测目标等设计 |
+| GPU 与分布式效率 | BF16/FP8、Triton/CUDA kernel、算子融合、通信与计算重叠 |
+| 数据与主机协作 | 数据加载、CPU 绑核、预取、内存分配、H2D 传输与 GPU 等待 |
+| 实验与复现质量 | 多次运行、统计显著性、同机对照、计时边界、源码与日志可核查 |
+
+主赛道看达到指定质量的训练时间；优化器赛道主要看固定模型下的训练步数，二者不能直接换算。我们的 **652 步 / 24.8998 秒** 不能直接与 Prime Intellect 表中的 **2726 步或 3042 步** 比较。
+
+该成绩的解释范围是这项训练任务。它不直接衡量聊天、推理、代码生成、推理服务延迟或大模型训练的整体成本，也不能据此认定某个研究系统全面胜过 Google、Microsoft 等机构。我们的方案继承了更多后续社区优化，且仍待官方复核。
+
 ## 核心策略
 
-在 ANVIL2 底座中加入 exact-match 检索特征，并缩短、重新安排训练日程。随后优化 CPU 绑核、预取批次的 CUDA 等待时机、各 rank 的索引释放协调，以及原始 shard 的 CPU 内存分配。实际 H2D 传输继续使用 pinned 小批次缓冲；查询先于当前 step 数据入库，完整验证与计时边界保持不变。详见[策略说明](docs/STRATEGY.md)。
+模型从训练前缀中检索候选后续 token，将匹配长度与候选 embedding 转化为可学习特征，在网络输入、中间层和输出处使用。652 步训练日程配合 FP8 计算和稀疏参数更新，在目标 loss 下缩短训练时间。CPU 绑核、延后至实际使用时的 CUDA 等待、各 rank 协调释放索引，以及普通 CPU 内存中的原始 shard，进一步减少主机与 GPU 的协作开销。实际 H2D 传输使用 pinned 小批次缓冲；查询先于当前 step 数据入库，完整验证与计时边界保持不变。详见[策略说明](docs/STRATEGY.md)。
 
 参考环境为 **8×H100 80GB HBM3、双路 Xeon Platinum 8481C、约 1.8 TiB 主机内存**。完整检索使用 **103 个训练 shard**，另需一个验证 shard。CPU 绑核针对该机器拓扑，迁移到其他机器前应按[复现指南](docs/REPRODUCE.md)核查。
 
 [`model/`](model/) 保存 33 份逐字节一致的归档源码；[`provenance/source-files.json`](provenance/source-files.json) 记录其 SHA256。`model/README.md` 是继承的历史文档，运行本策略请以本仓库的[复现指南](docs/REPRODUCE.md)为准。
 
-感谢 [Keller Jordan 及 modded-nanogpt 贡献者](https://github.com/KellerJordan/modded-nanogpt)、[Deven Pietrzak 的 ANVIL2](https://github.com/KellerJordan/modded-nanogpt/pull/360) 和 [hermabr 的 exact-match](https://github.com/KellerJordan/modded-nanogpt/pull/367)。详见[致谢](CREDITS.md)与[许可证](LICENSE)。
+[来源署名与致谢](CREDITS.md) · [MIT 许可证](LICENSE)

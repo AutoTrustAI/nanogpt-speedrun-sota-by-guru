@@ -1,0 +1,10 @@
+{
+  "project": "ForgeMatch",
+  "experiment_attribution": "ScienceGuru + Guru Turbo 1.2",
+  "platform_label": "ScienceGuru",
+  "model_label": "Guru Turbo 1.2",
+  "attribution_source": "Project owner instruction, 2026-09-23",
+  "benchmark_evidence": "benchmark-evidence.json",
+  "source_authorship": "../CREDITS.md",
+  "scope": "Project attribution; source hashes, runtime environment and measured result records are preserved separately."
+}
