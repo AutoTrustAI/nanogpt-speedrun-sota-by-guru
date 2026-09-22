@@ -1,8 +1,12 @@
-# ForgeMatch · 铸忆
+# ForgeMatch
 
 **ScienceGuru + Guru Turbo 1.2 · 24.8998 seconds on 8× H100, verified across five seeds.**
 
-[中文](README.zh-CN.md) · [Reproduce](docs/REPRODUCE.md) · [Strategy](docs/STRATEGY.md) · [Evidence](docs/EVIDENCE.md) · [Research baselines](docs/BASELINES.md) · [Rules and limitations](docs/COMPLIANCE.md)
+![NanoGPT training-time comparison: ForgeMatch 24.8998 seconds, ANVIL2 39.914, Exact-match 47.2056, community reference approximately 67.56, Recursive approximately 75.36, PACEvolve 140.2, NorMuon approximately 140.70, and Enigma approximately 179.40 seconds.](assets/benchmark-comparison.svg)
+
+[Chart data and sources](docs/BASELINES.md) · [Download PNG](assets/benchmark-comparison.png)
+
+[Chinese](README.zh-CN.md) · [Reproduce](docs/REPRODUCE.md) · [Strategy](docs/STRATEGY.md) · [Evidence](docs/EVIDENCE.md) · [Research baselines](docs/BASELINES.md) · [Rules and limitations](docs/COMPLIANCE.md)
 
 ForgeMatch trains a language model with causal prefix retrieval, sparse n-gram embeddings, FP8 execution, and a compact training schedule. CPU affinity, asynchronous prefetching, and coordinated memory management keep the GPUs supplied with data and reduce timing variation.
 

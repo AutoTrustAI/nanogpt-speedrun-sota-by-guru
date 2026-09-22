@@ -13,6 +13,7 @@ These results concern the 8×H100 task targeting FineWeb validation loss ≤3.28
 | Stanford-associated Enigma project | Faster gradient all-reduce | **≈179.40 s** | Official record #22: 2.990 min, 2025-05-24 |
 | Recursive | Faster ReLU² MLP kernel | **≈75.36 s** | Official record #87: 1.256 min; contribution dated 2026-06-11, PR322 merged 2026-08-02 |
 | Hyperstition, formerly Social Physics Lab | ANVIL2 | **39.914 s** | Public mean over 18 runs; PR360 opened 2026-08-31, still open at this check |
+| Individual contributor hermabr | Exact-match | **47.2056 s** | Public five-run mean; [PR367](https://github.com/KellerJordan/modded-nanogpt/pull/367) still open at this check |
 | Community reference, not a laboratory attribution | Infeasible-token-continuation masking | **≈67.56 s** | Latest listed accepted record #91: 1.126 min, 2026-08-06 |
 | **ScienceGuru + Guru Turbo 1.2** | **ForgeMatch** | **24.8998 s** | Local five-seed cohort, 652 steps; not officially accepted |
 
@@ -25,6 +26,7 @@ Record identities and rounded times come from the [official record history](http
 - **Enigma:** the [OmniMouse paper](https://borowiecki.dev/pdf/2604.18827) identifies Stanford-affiliated contributors on page 1; Appendix A.5, page 22, explicitly connects the group's distributed-training strategy to NanoGPT record #22. The leaderboard also names the Enigma project. This supports a Stanford-associated project attribution; it does not establish a Hazy Research or CRFM submission.
 - **Recursive:** [PR322](https://github.com/KellerJordan/modded-nanogpt/pull/322) identifies Recursive and reports **77.34 s**, mean loss **3.27893**, across **13** Modal runs, against **80.61 s** for its 10-run same-machine baseline. Those are the original branch's measurements. The maintainer later integrated only the ReLU² kernel into a newer baseline, yielding official record #87 at 1.256 min. The original 77.34 s and accepted ≈75.36 s describe different code versions.
 - **ANVIL2:** [PR360](https://github.com/KellerJordan/modded-nanogpt/pull/360) names Deven Pietrzak and Hyperstition, formerly Social Physics Lab. Its 18-run mean is 39.914 s, with mean loss about 3.27731; one raw log is disclosed as lost. The author's MIT background does not establish an MIT laboratory submission. Source authorship is documented in [Credits](../CREDITS.md).
+- **Exact-match:** the author's [five-run statistics](https://github.com/hermabr/modded-nanogpt-public/blob/3e92b0e28293dcb184197da1a0ce1f543e84f76c/records/track_1_short/2026-09-16_ExactMatch/this_pr/statistics.md) report 47.2056 s and mean loss 3.26556. This is a public contributor result, with more loss margin than ForgeMatch's measured cohort.
 
 ## OpenAI and Anthropic models: a separate optimizer evaluation
 
@@ -59,3 +61,9 @@ This review did not establish comparable institution-authored Track 1 times for 
 The core metric is training time to a fixed FineWeb language-modeling loss, not chat quality, reasoning ability, coding accuracy, inference latency, or total project cost. The current task descends from a GPT-2-small-quality target; that label should not be read as a requirement to retain the original GPT-2 architecture. For example, large lookup tables and hardware-specific techniques can improve the speedrun while needing separate studies of memory cost, inference behavior, and scaling.
 
 An agent-assisted result additionally depends on its starting code, internet access, tools, human steering, experiment budget, and prior exposure to the benchmark. ForgeMatch's 24.8998 s is evidence about a training recipe under its documented setup. Establishing broader research-agent superiority would require a controlled evaluation with matched starting points and budgets, independent held-out runs, and other tasks. Official record acceptance also remains separate from our local evidence checks.
+
+## Regenerating the comparison chart
+
+The README chart reads ForgeMatch's measured mean directly from [cohorts.json](../results/cohorts.json). Public values and source links are in [comparison-data.json](../assets/comparison-data.json). Bars use a linear axis starting at zero; approximate values retain their precision markers. The figure displays selected training times, with the source context documented above.
+
+With Python and Matplotlib installed, run `python3 scripts/plot_comparison.py` from the repository root to recreate the [SVG](../assets/benchmark-comparison.svg) and [PNG](../assets/benchmark-comparison.png). The renderer was verified with Matplotlib 3.11.1. Rendering the chart does not execute or alter any benchmark run.

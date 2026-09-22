@@ -1,0 +1,67 @@
+{
+  "as_of": "2026-09-23",
+  "metric": "Reported training time to FineWeb validation loss <= 3.28",
+  "hardware": "8 x H100",
+  "local_cohort": "coordinated-pageable652-five-v1",
+  "local_results": "results/cohorts.json",
+  "source_details": "docs/BASELINES.md",
+  "public_results": [
+    {
+      "method": "ANVIL2",
+      "affiliation": "Hyperstition",
+      "seconds": "39.914",
+      "approximate": false,
+      "source": "https://github.com/KellerJordan/modded-nanogpt/pull/360"
+    },
+    {
+      "method": "Exact-match",
+      "affiliation": "hermabr",
+      "seconds": "47.2056",
+      "approximate": false,
+      "source": "https://github.com/hermabr/modded-nanogpt-public/blob/3e92b0e28293dcb184197da1a0ce1f543e84f76c/records/track_1_short/2026-09-16_ExactMatch/this_pr/statistics.md"
+    },
+    {
+      "method": "Community reference",
+      "affiliation": "modded-nanogpt",
+      "seconds": "67.56",
+      "approximate": true,
+      "source_minutes": "1.126",
+      "record": 91,
+      "source": "https://github.com/KellerJordan/modded-nanogpt#world-record-history"
+    },
+    {
+      "method": "Recursive",
+      "affiliation": "Recursive",
+      "seconds": "75.36",
+      "approximate": true,
+      "source_minutes": "1.256",
+      "record": 87,
+      "source": "https://github.com/KellerJordan/modded-nanogpt/pull/322"
+    },
+    {
+      "method": "PACEvolve",
+      "affiliation": "Google / DeepMind + collaborators",
+      "seconds": "140.2",
+      "approximate": false,
+      "source": "https://arxiv.org/pdf/2601.10657v3"
+    },
+    {
+      "method": "NorMuon",
+      "affiliation": "Microsoft / Georgia Tech",
+      "seconds": "140.70",
+      "approximate": true,
+      "source_minutes": "2.345",
+      "record": 41,
+      "source": "https://github.com/KellerJordan/modded-nanogpt/pull/144"
+    },
+    {
+      "method": "Enigma",
+      "affiliation": "Stanford-associated project",
+      "seconds": "179.40",
+      "approximate": true,
+      "source_minutes": "2.990",
+      "record": 22,
+      "source": "https://github.com/KellerJordan/modded-nanogpt#world-record-history"
+    }
+  ]
+}
