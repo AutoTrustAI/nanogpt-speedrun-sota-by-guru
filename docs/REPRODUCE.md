@@ -11,6 +11,17 @@ The model under `model/` is the exact 33-file source inventory from commit
 the original archived orchestration with these model bytes. Validation of the
 packaged portable wrapper covers CPU checks and dry-run execution.
 
+## Get the source
+
+Clone the repository from the **AutoTrustAI** organization:
+
+```sh
+git clone https://github.com/AutoTrustAI/forgematch-nanogpt.git
+cd forgematch-nanogpt
+```
+
+Run the setup and launch commands below from this repository directory.
+
 ## Hardware and runtime
 
 The measurements used a single Linux host with eight NVIDIA H100 80 GB GPUs,
