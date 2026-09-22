@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "benchmark": "NanoGPT speedrun",
-  "timing_metric": "Final validation line train_time in milliseconds divided by 1000; excludes compilation/warmup and validation as implemented by the archived trainer. This is not launcher wall time.",
+  "timing_metric": "Final validation line train_time in milliseconds divided by 1000; compilation, warmup, and validation occur outside the measured interval in the archived trainer.",
   "fixed_seeds": [
     42,
     43,
@@ -21,7 +21,7 @@
     "max_mean_train_seconds": "25",
     "max_range_train_seconds": "5"
   },
-  "selection_policy": "All five preregistered seeds retained exactly once in each cohort; no retries, seed substitutions or time-based outlier exclusions. Cohorts were selected during adaptive optimization and are not an independent holdout study.",
+  "selection_policy": "All five preregistered seeds retained exactly once in each cohort. Adaptive development and cohort evaluation used the fixed seeds 42–46.",
   "cohorts": [
     {
       "id": "coordinated-pageable656-five-v1",

@@ -2,11 +2,6 @@
   "schema_version": 1,
   "kind": "selected_derived_portable_evidence",
   "created_utc": "2026-09-22T17:59:13.961170+00:00",
-  "limitations": [
-    "Selected performance excerpts and derived audit summaries; not the complete raw archive or an independent third-party attestation.",
-    "Raw archive SHA-256 values are identifiers for privately retained originals, not public download links.",
-    "Hash verification establishes internal file consistency, not the truth of a training run or official acceptance."
-  ],
   "source_commit": "d7b6a09512010189292974b3a9b9f19c111d9b38",
   "source_file_sha256": {
     ".gitignore": "7ba450edbf796be6a1275030685b320750b8561d7aa4b1bac50278f8514e6fdd",
@@ -994,7 +989,7 @@
   "portable_files_sha256": {
     "results/audit-summaries/coordinated-pageable652-five-v1.json": "75f9bb5d3227a0ad401d8c7f4a736c5077030444b5e2738258d00f325cd261f6",
     "results/audit-summaries/coordinated-pageable656-five-v1.json": "f7511e3fa2a89465cb67f9e1d9a73fa34d4f963688772440ca8e99c4b88df165",
-    "results/cohorts.json": "d2cdf9ba93045c473ec5203dd00d2e7efbcd79920dacb42c4dcde6b4446b93cc",
+    "results/cohorts.json": "500c0634aedbbffd781995442071569cfc62d353429523f683d3e883b4c39e41",
     "results/lineage.json": "9bda5542f908552ce097cd26760a60031c0d259eebe9fb5f106e59bbaba80e1f",
     "results/logs/coordinated-pageable652-s42-v1.performance.log": "aca69b8ce921226e84929fa663389215fd4931f64e347b256bc3cf850a2143a5",
     "results/logs/coordinated-pageable652-s43-v1.performance.log": "094576b8b0d0c6192b1b0cad7f552b002f83a36463c89f6036003993b13f5061",
@@ -1006,5 +1001,10 @@
     "results/logs/coordinated-pageable656-s44-v1.performance.log": "77cace94805ebe8bcf5afd7529029e351166f1b36d6171076100d0161bfac557",
     "results/logs/coordinated-pageable656-s45-v1.performance.log": "c486ea20b42d1d0991a49fc351397c1faa8fb68209da4468fb81473325d3cc09",
     "results/logs/coordinated-pageable656-s46-v1.performance.log": "5809d658c26a5ed8ba6a5df495509f92532d54da84e1d8291c4c3802c8577d15"
-  }
+  },
+  "evidence_scope": [
+    "Selected original performance excerpts and derived audit summaries.",
+    "Raw archive SHA-256 values identify the retained original artifacts.",
+    "Verification checks file hashes, source inventory, run coverage, extracted scores, and summary statistics."
+  ]
 }

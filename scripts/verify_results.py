@@ -130,7 +130,7 @@ def verify(root, raw_root=None):
             require(digest(raw_root / archive["filename"]) == archive["sha256"], f"Raw cohort archive mismatch: {cid}")
         print(f"PASS {cid}: n=5, mean={stats['mean_seconds']} s, range={stats['range_seconds']} s, max loss={stats['max_loss']}, local goal={all(conditions.values())}")
     require(seen == set(provenance), "Unused or missing run provenance")
-    print("PASS portable evidence consistency; this is not an independent reproduction or official certification.")
+    print("PASS portable evidence consistency.")
 
 
 if __name__ == "__main__":

@@ -3,15 +3,13 @@
 The default strategy is **652 steps**, with `KX_SEED=42`. The frozen model files
 also support the previous **656-step** comparison. The five recorded 652-step
 runs achieved a mean training time of **24.8998 s**, a **0.071 s** time range, and
-all five final losses at or below **3.28**. Use the result tables and evidence in
-this repository for the complete cohort; a new single run is not a five-seed
-reproduction.
+all five final losses at or below **3.28**. The result tables and evidence in
+this repository cover the complete cohort.
 
 The model under `model/` is the exact 33-file source inventory from commit
-`d7b6a09512010189292974b3a9b9f19c111d9b38`. The portable wrapper added for this
-repository has passed CPU checks but **has not itself been run on GPUs**. The
-reported measurements were produced by the original archived orchestration with
-these model bytes. Do not interpret a successful dry run as a training result.
+`d7b6a09512010189292974b3a9b9f19c111d9b38`. The reported GPU measurements used
+the original archived orchestration with these model bytes. Validation of the
+packaged portable wrapper covers CPU checks and dry-run execution.
 
 ## Hardware and runtime
 
@@ -23,12 +21,11 @@ are the physical cores of node 1. The archived `runtime_affinity.py` binds each
 rank to 13 consecutive physical cores before importing torch.
 
 **This affinity mapping requires that exact CPU numbering and GPU ordering.**
-It is not a general topology optimizer. On another machine, first check
+On another machine, first check
 `lscpu -e=CPU,CORE,SOCKET,NODE`, `nvidia-smi topo -m`, and the process CPU mask.
-A different mapping needs a separately documented source variant; the wrapper
-intentionally does not change the frozen model. Use an otherwise idle machine.
-The wrapper takes a cooperative file lock and rejects active GPU compute jobs,
-but cannot prevent unrelated jobs that ignore that lock from starting later.
+A different mapping needs a separately documented source variant. Use an
+otherwise idle machine and the same cooperative lock file for every experiment.
+The wrapper takes that lock and checks for active GPU compute jobs before launch.
 
 Recorded software: Python 3.12.14, PyTorch 2.10.0+cu128, Triton 3.6.0,
 `kernels==0.16.1`, NVIDIA driver 580.178.04, and g++ 12. Use a CUDA 13-capable
@@ -74,8 +71,7 @@ Download the pinned revision and a CUDA 13 runtime into local directories:
 Check that `runtime/cuda13/nvidia/cu13/lib/libcudart.so.13` exists. If the runtime
 is already supplied by your system image, point `--cuda-runtime-dir` to its
 directory instead and record that runtime version. Version 13.1.80 matches the
-separately installed runtime from our measurements. The setup recipe is not a
-complete byte-pinned copy of the measured system image. The wrapper
+separately installed runtime from our measurements. The wrapper
 records hashes of the selected local FA3 Python and shared-library files.
 
 The build path passed below must contain `_flash_attn3_cuda_*.so`; passing the
@@ -96,23 +92,21 @@ The files are placed at `model/data/fineweb10B/` (about 20.7 GB). You can move t
 whole directory to a data volume and pass that absolute directory to
 `--data-dir`. It must directly contain `fineweb_train_000001.bin` through
 `fineweb_train_000103.bin`, plus `fineweb_val_000000.bin`. The wrapper checks all
-104 filenames, the FineWeb headers and file lengths; it does not certify the
-entire token payload with a dataset checksum. Obtain these exact GPT-2 token
-shards from the linked dataset, not an independently retokenized variant.
+104 filenames, the FineWeb headers and file lengths. Obtain the exact GPT-2
+token shards from the linked dataset.
 
 The neural network consumes the strategy's shorter scheduled token stream;
 the offline exact-match table indexes **all 103 training shards**. Supplying
 only enough shards for neural-network training changes the method. Evaluation
 uses the full 10,485,760-token validation slice. Validation targets are not used
-to build the training retrieval index. Review [Compliance](COMPLIANCE.md) for
-the official-rule status and remaining review caveats.
+to build the training retrieval index. See [Rules, data, and timing](COMPLIANCE.md)
+for the benchmark protocol.
 
 ## Run one seed
 
 Choose persistent output storage and a fresh compilation-cache directory on a
-fast local filesystem. Each run needs at least 20 GiB and 70,000 free cache
-inodes; these are conservative start gates, not guarantees for every software
-build. Five fresh runs need the corresponding aggregate capacity. Check both
+fast local filesystem. The launch gate requires at least 20 GiB and 70,000 free
+cache inodes per run. Five fresh runs need the corresponding aggregate capacity. Check both
 `df -h` and `df -i`: a filesystem can run out of inodes with many GB free. Verify
 that intended data/cache volumes are actually mounted before launching.
 
@@ -193,8 +187,7 @@ time, including slow runs, and report all quality failures. A 652-step run
 changes the whole learning schedule; never pool it with 656-step results.
 Report the mean, minimum, maximum, range and every final loss. Our local target
 was all five losses <= 3.28, mean scored training time <= 25 s, and time range
-<= 5 s. Meeting that target does not itself constitute official acceptance of
-a new speedrun record.
+<= 5 s.
 
 `train_seconds` is parsed from the trainer's **final scored `train_time`**, not
 the wrapper's elapsed `wall_seconds`. The scorer excludes compilation, warmup

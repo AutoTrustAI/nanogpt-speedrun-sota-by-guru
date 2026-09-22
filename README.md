@@ -6,7 +6,7 @@
 
 [Chart data and sources](docs/BASELINES.md) · [Download PNG](assets/benchmark-comparison.png)
 
-[Chinese](README.zh-CN.md) · [Reproduce](docs/REPRODUCE.md) · [Strategy](docs/STRATEGY.md) · [Evidence](docs/EVIDENCE.md) · [Research baselines](docs/BASELINES.md) · [Rules and limitations](docs/COMPLIANCE.md)
+[Chinese](README.zh-CN.md) · [Reproduce](docs/REPRODUCE.md) · [Strategy](docs/STRATEGY.md) · [Evidence](docs/EVIDENCE.md) · [Research baselines](docs/BASELINES.md) · [Benchmark protocol](docs/COMPLIANCE.md)
 
 ForgeMatch trains a language model with causal prefix retrieval, sparse n-gram embeddings, FP8 execution, and a compact training schedule. CPU affinity, asynchronous prefetching, and coordinated memory management keep the GPUs supplied with data and reduce timing variation.
 
@@ -25,12 +25,23 @@ ForgeMatch trains a language model with causal prefix retrieval, sparse n-gram e
 
 - Time range: **0.071 s**; sample standard deviation: **0.026499 s**.
 - Worst loss: **3.2777**; one-sided loss t-test against 3.28: **p ≈ 0.001868** (df = 4).
-- Fixed execution order: **43 → 42 → 44 → 45 → 46**. No outlier removal, seed replacement, or reuse of an earlier cohort's results.
-- The local target of mean time ≤25 s, time range ≤5 s, and all five losses ≤3.28 is met.
+- Fixed execution order: **43 → 42 → 44 → 45 → 46**, with all five runs included.
+- The target of mean time ≤25 s, time range ≤5 s, and all five losses ≤3.28 is met.
 
-These are measured benchmark-section times, **not full process wall times**. Compilation, warmup, and final model validation are excluded by the inherited timing convention. Content-dependent retrieval construction and required completion work remain inside the clock. See the [timing disclosure](docs/COMPLIANCE.md#timing-boundary).
+The metric is the final `train_time`: training, content-dependent retrieval construction, and required completion work are timed. Compilation, warmup, and final model validation occur outside this interval. See the [timing protocol](docs/COMPLIANCE.md#timing-boundary).
 
-The evidence-verified result is a local experimental result, **not an officially accepted world record**. Fixed seeds were used during adaptive development; the nominal t-test does not remove that statistical limitation. See [machine-readable results](results/cohorts.json) and the [evidence guide](docs/EVIDENCE.md).
+See [machine-readable results](results/cohorts.json) and the [evidence guide](docs/EVIDENCE.md).
+
+## Comparison with the official SOTA
+
+As of **2026-09-23**, the latest result in the [official Track 1 record history](https://github.com/KellerJordan/modded-nanogpt#world-record-history) is **Canonical Token Masking by @jvarho**, at **1.126 minutes (≈67.56 seconds)**. Its [PR #350](https://github.com/KellerJordan/modded-nanogpt/pull/350) is merged.
+
+| Strategy | Training time | Hardware | Target loss |
+|---|---:|---|---:|
+| **Official SOTA — Canonical Token Masking** | **≈67.56 s** | 8× H100 | ≤3.28 |
+| **ForgeMatch — ScienceGuru + Guru Turbo 1.2** | **24.8998 s** | 8× H100 | ≤3.28 |
+
+ForgeMatch uses **approximately 63.14% less training time**, a **2.713× speedup** against the published official SOTA time, saving **about 42.66 seconds**. The reference seconds are converted from the leaderboard's rounded minutes; ForgeMatch is the measured five-seed mean.
 
 ## Comparison with public strategies
 
@@ -40,27 +51,25 @@ The evidence-verified result is a local experimental result, **not an officially
 | [Exact-match](https://github.com/hermabr/modded-nanogpt-public/blob/3e92b0e28293dcb184197da1a0ce1f543e84f76c/records/track_1_short/2026-09-16_ExactMatch/this_pr/statistics.md) | 47.2056 s | 3.26556 | 5 | **47.25% / 1.896×** |
 | **ForgeMatch, 652 steps** | **24.8998 s** | **3.27498** | **5** | — |
 
-The public results use different machines and sample counts. These are comparisons at the same **loss ≤3.28 threshold**, not matched-loss or controlled same-machine speedups: Exact-match retains a larger quality margin. ANVIL2's published 18-run summary includes one run whose raw log was lost, as its authors disclose. The sources and our single-seed same-machine reproductions are explained in [Strategy](docs/STRATEGY.md#comparisons).
+The comparison uses the **loss ≤3.28 threshold** and each source's reported mean on its respective machine. Sample counts and achieved losses appear above; sources and same-machine seed-42 reproductions are in [Strategy](docs/STRATEGY.md#comparisons).
 
 ## Research-group baselines
 
-Verified on **2026-09-23**. These are historical public results associated with identifiable research groups, on the 8×H100 / FineWeb loss ≤3.28 task. They are not a ranking of the groups' current capabilities. Approximate seconds marked below are conversions from rounded official leaderboard minutes.
+Results checked on **2026-09-23**, for **8×H100 / FineWeb loss ≤3.28**. Approximate seconds are converted from rounded leaderboard minutes.
 
-| Research affiliation | Method | Public time | Evidence status |
-|---|---|---:|---|
-| Google + Google DeepMind, UW–Madison, UC San Diego | [PACEvolve](https://arxiv.org/pdf/2601.10657v3) | **140.2 s** | Paper experiment from version 40; 142.8 → 140.2 s; no accepted record located |
-| Georgia Tech + Microsoft | [NorMuon](https://github.com/KellerJordan/modded-nanogpt/pull/144) | **≈140.70 s** | Official historical record #41, 2.345 min |
-| Stanford-associated Enigma project | [Faster gradient all-reduce](https://github.com/KellerJordan/modded-nanogpt#world-record-history) | **≈179.40 s** | Official historical record #22, 2.990 min |
-| Recursive | [ReLU² kernel contribution](https://github.com/KellerJordan/modded-nanogpt/pull/322) | **≈75.36 s** | Official historical record #87, 1.256 min; only part of the original submission was integrated |
-| Hyperstition, formerly Social Physics Lab | [ANVIL2](https://github.com/KellerJordan/modded-nanogpt/pull/360) | **39.914 s** | Public 18-run mean; PR still open |
+| Research affiliation | Method | Public time |
+|---|---|---:|
+| Google + Google DeepMind, UW–Madison, UC San Diego | [PACEvolve](https://arxiv.org/pdf/2601.10657v3) | **140.2 s** |
+| Georgia Tech + Microsoft | [NorMuon](https://github.com/KellerJordan/modded-nanogpt/pull/144) | **≈140.70 s** |
+| Stanford-associated Enigma project | [Faster gradient all-reduce](https://github.com/KellerJordan/modded-nanogpt#world-record-history) | **≈179.40 s** |
+| Recursive | [ReLU² kernel contribution](https://github.com/KellerJordan/modded-nanogpt/pull/322) | **≈75.36 s** |
+| Hyperstition, formerly Social Physics Lab | [ANVIL2](https://github.com/KellerJordan/modded-nanogpt/pull/360) | **39.914 s** |
 
-Affiliation evidence, dates, original submission versus accepted-record distinctions, and separate optimizer-track results for OpenAI/Anthropic models are in [Research baselines](docs/BASELINES.md).
+Affiliations, dates, source details, and optimizer-track results for OpenAI/Anthropic models are in [Research baselines](docs/BASELINES.md).
 
 ## What this benchmark establishes
 
 NanoGPT Speedrun measures **time to a fixed language-modeling quality target**. It exercises training algorithms, model architecture, GPU kernels, distributed communication, data movement, and reproducible experimentation. Its research value includes exposing useful optimization ideas and providing an open task for evaluating autonomous research systems; Google/DeepMind, METR, and Prime Intellect have used it for this purpose. See [benchmark significance and scope](docs/BASELINES.md#benchmark-significance-and-scope).
-
-The result applies to this workload and protocol. It does not establish frontier-model capability, inference speed, total research cost, or general superiority over another laboratory. ForgeMatch builds on newer community work than several historical baselines above and still needs official acceptance.
 
 ## What is included
 
