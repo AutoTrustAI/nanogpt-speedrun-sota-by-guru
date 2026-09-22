@@ -1,0 +1,225 @@
+{
+  "kind": "selected_predecessor_lineage_not_complete_experiment_ledger",
+  "scope": "Three immediate predecessor cohorts; all planned seed slots retained, including failure and never-started slots. Detailed raw archives remain private. Earlier optimization experiments are outside this compact export.",
+  "cohorts": [
+    {
+      "id": "affinity-deferred656-five-v1",
+      "status": "completed",
+      "rows": [
+        {
+          "seed": 42,
+          "label": "affinity-deferred656-s42-v1",
+          "status": "completed",
+          "exit_code": 0,
+          "steps": 656,
+          "git_head": "38cfda528fa8b6299617c28241b4c63a0d2ae790",
+          "val_loss": 3.2708,
+          "train_seconds": 25.567
+        },
+        {
+          "seed": 43,
+          "label": "affinity-deferred656-s43-v1",
+          "status": "completed",
+          "exit_code": 0,
+          "steps": 656,
+          "git_head": "38cfda528fa8b6299617c28241b4c63a0d2ae790",
+          "val_loss": 3.2761,
+          "train_seconds": 25.293
+        },
+        {
+          "seed": 44,
+          "label": "affinity-deferred656-s44-v1",
+          "status": "completed",
+          "exit_code": 0,
+          "steps": 656,
+          "git_head": "38cfda528fa8b6299617c28241b4c63a0d2ae790",
+          "val_loss": 3.2729,
+          "train_seconds": 25.221
+        },
+        {
+          "seed": 45,
+          "label": "affinity-deferred656-s45-v1",
+          "status": "completed",
+          "exit_code": 0,
+          "steps": 656,
+          "git_head": "38cfda528fa8b6299617c28241b4c63a0d2ae790",
+          "val_loss": 3.2741,
+          "train_seconds": 25.022
+        },
+        {
+          "seed": 46,
+          "label": "affinity-deferred656-s46-v1",
+          "status": "completed",
+          "exit_code": 0,
+          "steps": 656,
+          "git_head": "38cfda528fa8b6299617c28241b4c63a0d2ae790",
+          "val_loss": 3.2717,
+          "train_seconds": 25.313
+        }
+      ],
+      "execution_seed_order": [
+        43,
+        42,
+        44,
+        45,
+        46
+      ],
+      "complete_five_seed_statistics": {
+        "mean_seconds": "25.2832",
+        "range_seconds": "0.545",
+        "mean_loss": "3.27312"
+      },
+      "original_summary_sha256": "6c19001a3899264091be8b77b3d1537bf5dd84aa75a53b5d0be8a9d59b7dfcac",
+      "raw_archive": {
+        "filename": "affinity-deferred656-five-v1-cohort.tar.gz",
+        "sha256": "de93d69994a3f3d5adfd811aad59cadbde73a75c2c79216b6a585e6008eb4e64",
+        "included_in_repository": false
+      }
+    },
+    {
+      "id": "coordinated-release656-five-v1",
+      "status": "failed",
+      "rows": [
+        {
+          "seed": 42,
+          "label": "coordinated-release656-s42-v1",
+          "status": "completed",
+          "exit_code": 0,
+          "steps": 656,
+          "git_head": "7f6f968dea96b9c5219affc4b6c0a678cf1d57c0",
+          "val_loss": 3.2712,
+          "train_seconds": 24.906
+        },
+        {
+          "seed": 43,
+          "label": "coordinated-release656-s43-v1",
+          "status": "completed",
+          "exit_code": 0,
+          "steps": 656,
+          "git_head": "7f6f968dea96b9c5219affc4b6c0a678cf1d57c0",
+          "val_loss": 3.2771,
+          "train_seconds": 25.032
+        },
+        {
+          "seed": 44,
+          "label": "coordinated-release656-s44-v1",
+          "status": "failed",
+          "exit_code": 1,
+          "steps": null,
+          "git_head": "7f6f968dea96b9c5219affc4b6c0a678cf1d57c0",
+          "val_loss": null,
+          "train_seconds": null,
+          "failure": "Inductor compilation warmup failed with ENOSPC because cache filesystem inodes were exhausted; no training score."
+        },
+        {
+          "seed": 45,
+          "label": "coordinated-release656-s45-v1",
+          "status": "not_started",
+          "exit_code": null,
+          "steps": null,
+          "git_head": null,
+          "val_loss": null,
+          "train_seconds": null
+        },
+        {
+          "seed": 46,
+          "label": "coordinated-release656-s46-v1",
+          "status": "not_started",
+          "exit_code": null,
+          "steps": null,
+          "git_head": null,
+          "val_loss": null,
+          "train_seconds": null
+        }
+      ],
+      "execution_seed_order": [
+        43,
+        42,
+        44,
+        45,
+        46
+      ],
+      "complete_five_seed_statistics": null,
+      "original_summary_sha256": "fdc7edb7747c2d92315741ab85eeaa8152677004998a1ef612fe11b7344c98f7",
+      "raw_archive": {
+        "filename": "coordinated-release656-five-v1-cohort.tar.gz",
+        "sha256": "c18aa9b4a30a557e379e523875215749dc424a89712ce895bfca8addb5cf0bb0",
+        "included_in_repository": false
+      }
+    },
+    {
+      "id": "coordinated-release656-five-v2",
+      "status": "completed",
+      "rows": [
+        {
+          "seed": 42,
+          "label": "coordinated-release656-s42-v2",
+          "status": "completed",
+          "exit_code": 0,
+          "steps": 656,
+          "git_head": "7f6f968dea96b9c5219affc4b6c0a678cf1d57c0",
+          "val_loss": 3.2727,
+          "train_seconds": 25.069
+        },
+        {
+          "seed": 43,
+          "label": "coordinated-release656-s43-v2",
+          "status": "completed",
+          "exit_code": 0,
+          "steps": 656,
+          "git_head": "7f6f968dea96b9c5219affc4b6c0a678cf1d57c0",
+          "val_loss": 3.2766,
+          "train_seconds": 25.109
+        },
+        {
+          "seed": 44,
+          "label": "coordinated-release656-s44-v2",
+          "status": "completed",
+          "exit_code": 0,
+          "steps": 656,
+          "git_head": "7f6f968dea96b9c5219affc4b6c0a678cf1d57c0",
+          "val_loss": 3.2736,
+          "train_seconds": 25.123
+        },
+        {
+          "seed": 45,
+          "label": "coordinated-release656-s45-v2",
+          "status": "completed",
+          "exit_code": 0,
+          "steps": 656,
+          "git_head": "7f6f968dea96b9c5219affc4b6c0a678cf1d57c0",
+          "val_loss": 3.2736,
+          "train_seconds": 25.019
+        },
+        {
+          "seed": 46,
+          "label": "coordinated-release656-s46-v2",
+          "status": "completed",
+          "exit_code": 0,
+          "steps": 656,
+          "git_head": "7f6f968dea96b9c5219affc4b6c0a678cf1d57c0",
+          "val_loss": 3.2722,
+          "train_seconds": 25.111
+        }
+      ],
+      "execution_seed_order": [
+        43,
+        42,
+        44,
+        45,
+        46
+      ],
+      "complete_five_seed_statistics": {
+        "mean_seconds": "25.0862",
+        "range_seconds": "0.104",
+        "mean_loss": "3.27374"
+      },
+      "original_summary_sha256": "43307f04d6bb07c27418a406bd41cb72959aa7960ce54b385a13279523f0cc0f",
+      "raw_archive": {
+        "filename": "coordinated-release656-five-v2-cohort.tar.gz",
+        "sha256": "de42da28d8fcb63293ab1a38a2ae6b3bd0d6c0397f2bf26d513f25ea081012c6",
+        "included_in_repository": false
+      }
+    }
+  ]
+}

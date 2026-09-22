@@ -1,0 +1,251 @@
+{
+  "schema_version": 1,
+  "benchmark": "NanoGPT speedrun",
+  "timing_metric": "Final validation line train_time in milliseconds divided by 1000; excludes compilation/warmup and validation as implemented by the archived trainer. This is not launcher wall time.",
+  "fixed_seeds": [
+    42,
+    43,
+    44,
+    45,
+    46
+  ],
+  "execution_seed_order": [
+    43,
+    42,
+    44,
+    45,
+    46
+  ],
+  "local_target": {
+    "max_loss_each": "3.28",
+    "max_mean_train_seconds": "25",
+    "max_range_train_seconds": "5"
+  },
+  "selection_policy": "All five preregistered seeds retained exactly once in each cohort; no retries, seed substitutions or time-based outlier exclusions. Cohorts were selected during adaptive optimization and are not an independent holdout study.",
+  "cohorts": [
+    {
+      "id": "coordinated-pageable656-five-v1",
+      "status": "completed",
+      "audit_status": "VERIFIED_COMPLETE_IN_PRIVATE_FULL_AUDIT",
+      "steps": 656,
+      "source_commit": "d7b6a09512010189292974b3a9b9f19c111d9b38",
+      "fixed_seeds": [
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "execution_seed_order": [
+        43,
+        42,
+        44,
+        45,
+        46
+      ],
+      "rows": [
+        {
+          "seed": 42,
+          "label": "coordinated-pageable656-s42-v1",
+          "status": "completed",
+          "steps": 656,
+          "train_seconds": "25.018",
+          "val_loss": "3.2718",
+          "exit_code": 0,
+          "started_utc": "2026-09-22T09:59:52.164221+00:00",
+          "completed_utc": "2026-09-22T10:08:34.556312+00:00",
+          "source_commit": "d7b6a09512010189292974b3a9b9f19c111d9b38",
+          "performance_excerpt": "results/logs/coordinated-pageable656-s42-v1.performance.log"
+        },
+        {
+          "seed": 43,
+          "label": "coordinated-pageable656-s43-v1",
+          "status": "completed",
+          "steps": 656,
+          "train_seconds": "25.019",
+          "val_loss": "3.2769",
+          "exit_code": 0,
+          "started_utc": "2026-09-22T09:49:21.415208+00:00",
+          "completed_utc": "2026-09-22T09:58:10.710699+00:00",
+          "source_commit": "d7b6a09512010189292974b3a9b9f19c111d9b38",
+          "performance_excerpt": "results/logs/coordinated-pageable656-s43-v1.performance.log"
+        },
+        {
+          "seed": 44,
+          "label": "coordinated-pageable656-s44-v1",
+          "status": "completed",
+          "steps": 656,
+          "train_seconds": "25.049",
+          "val_loss": "3.2742",
+          "exit_code": 0,
+          "started_utc": "2026-09-22T10:08:34.969704+00:00",
+          "completed_utc": "2026-09-22T10:17:18.691185+00:00",
+          "source_commit": "d7b6a09512010189292974b3a9b9f19c111d9b38",
+          "performance_excerpt": "results/logs/coordinated-pageable656-s44-v1.performance.log"
+        },
+        {
+          "seed": 45,
+          "label": "coordinated-pageable656-s45-v1",
+          "status": "completed",
+          "steps": 656,
+          "train_seconds": "25",
+          "val_loss": "3.2730",
+          "exit_code": 0,
+          "started_utc": "2026-09-22T10:17:19.105695+00:00",
+          "completed_utc": "2026-09-22T10:26:01.524499+00:00",
+          "source_commit": "d7b6a09512010189292974b3a9b9f19c111d9b38",
+          "performance_excerpt": "results/logs/coordinated-pageable656-s45-v1.performance.log"
+        },
+        {
+          "seed": 46,
+          "label": "coordinated-pageable656-s46-v1",
+          "status": "completed",
+          "steps": 656,
+          "train_seconds": "24.941",
+          "val_loss": "3.2735",
+          "exit_code": 0,
+          "started_utc": "2026-09-22T10:26:01.941906+00:00",
+          "completed_utc": "2026-09-22T10:34:48.169511+00:00",
+          "source_commit": "d7b6a09512010189292974b3a9b9f19c111d9b38",
+          "performance_excerpt": "results/logs/coordinated-pageable656-s46-v1.performance.log"
+        }
+      ],
+      "statistics": {
+        "n": 5,
+        "mean_seconds": "25.0054",
+        "range_seconds": "0.108",
+        "min_seconds": "24.941",
+        "max_seconds": "25.049",
+        "mean_loss": "3.27388",
+        "max_loss": "3.2769"
+      },
+      "local_goal_conditions": {
+        "all_losses_le_3_28": true,
+        "mean_seconds_le_25": false,
+        "range_seconds_le_5": true
+      },
+      "local_goal_pass": false,
+      "loss_test": {
+        "alternative": "population mean final loss < 3.28",
+        "null_boundary_loss": 3.28,
+        "n": 5,
+        "degrees_of_freedom": 4,
+        "assumptions": "Independent losses and approximately normal sampling distribution; fixed five seeds and one observation each do not establish these assumptions.",
+        "t_statistic": 7.195519756194512,
+        "p_value": 0.0009883790108189405
+      }
+    },
+    {
+      "id": "coordinated-pageable652-five-v1",
+      "status": "completed",
+      "audit_status": "VERIFIED_COMPLETE_IN_PRIVATE_FULL_AUDIT",
+      "steps": 652,
+      "source_commit": "d7b6a09512010189292974b3a9b9f19c111d9b38",
+      "fixed_seeds": [
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "execution_seed_order": [
+        43,
+        42,
+        44,
+        45,
+        46
+      ],
+      "rows": [
+        {
+          "seed": 42,
+          "label": "coordinated-pageable652-s42-v1",
+          "status": "completed",
+          "steps": 652,
+          "train_seconds": "24.908",
+          "val_loss": "3.2733",
+          "exit_code": 0,
+          "started_utc": "2026-09-22T17:10:31.685496+00:00",
+          "completed_utc": "2026-09-22T17:19:15.622178+00:00",
+          "source_commit": "d7b6a09512010189292974b3a9b9f19c111d9b38",
+          "performance_excerpt": "results/logs/coordinated-pageable652-s42-v1.performance.log"
+        },
+        {
+          "seed": 43,
+          "label": "coordinated-pageable652-s43-v1",
+          "status": "completed",
+          "steps": 652,
+          "train_seconds": "24.898",
+          "val_loss": "3.2777",
+          "exit_code": 0,
+          "started_utc": "2026-09-22T10:41:17.013028+00:00",
+          "completed_utc": "2026-09-22T10:49:57.817340+00:00",
+          "source_commit": "d7b6a09512010189292974b3a9b9f19c111d9b38",
+          "performance_excerpt": "results/logs/coordinated-pageable652-s43-v1.performance.log"
+        },
+        {
+          "seed": 44,
+          "label": "coordinated-pageable652-s44-v1",
+          "status": "completed",
+          "steps": 652,
+          "train_seconds": "24.868",
+          "val_loss": "3.2752",
+          "exit_code": 0,
+          "started_utc": "2026-09-22T17:19:16.034914+00:00",
+          "completed_utc": "2026-09-22T17:27:57.556076+00:00",
+          "source_commit": "d7b6a09512010189292974b3a9b9f19c111d9b38",
+          "performance_excerpt": "results/logs/coordinated-pageable652-s44-v1.performance.log"
+        },
+        {
+          "seed": 45,
+          "label": "coordinated-pageable652-s45-v1",
+          "status": "completed",
+          "steps": 652,
+          "train_seconds": "24.939",
+          "val_loss": "3.2732",
+          "exit_code": 0,
+          "started_utc": "2026-09-22T17:27:57.968860+00:00",
+          "completed_utc": "2026-09-22T17:36:43.605325+00:00",
+          "source_commit": "d7b6a09512010189292974b3a9b9f19c111d9b38",
+          "performance_excerpt": "results/logs/coordinated-pageable652-s45-v1.performance.log"
+        },
+        {
+          "seed": 46,
+          "label": "coordinated-pageable652-s46-v1",
+          "status": "completed",
+          "steps": 652,
+          "train_seconds": "24.886",
+          "val_loss": "3.2755",
+          "exit_code": 0,
+          "started_utc": "2026-09-22T17:36:44.022641+00:00",
+          "completed_utc": "2026-09-22T17:45:36.407165+00:00",
+          "source_commit": "d7b6a09512010189292974b3a9b9f19c111d9b38",
+          "performance_excerpt": "results/logs/coordinated-pageable652-s46-v1.performance.log"
+        }
+      ],
+      "statistics": {
+        "n": 5,
+        "mean_seconds": "24.8998",
+        "range_seconds": "0.071",
+        "min_seconds": "24.868",
+        "max_seconds": "24.939",
+        "mean_loss": "3.27498",
+        "max_loss": "3.2777"
+      },
+      "local_goal_conditions": {
+        "all_losses_le_3_28": true,
+        "mean_seconds_le_25": true,
+        "range_seconds_le_5": true
+      },
+      "local_goal_pass": true,
+      "loss_test": {
+        "alternative": "population mean final loss < 3.28",
+        "null_boundary_loss": 3.28,
+        "n": 5,
+        "degrees_of_freedom": 4,
+        "assumptions": "Independent losses and approximately normal sampling distribution; fixed five seeds and one observation each do not establish these assumptions.",
+        "t_statistic": 6.063615676674414,
+        "p_value": 0.0018675960966106908
+      }
+    }
+  ]
+}

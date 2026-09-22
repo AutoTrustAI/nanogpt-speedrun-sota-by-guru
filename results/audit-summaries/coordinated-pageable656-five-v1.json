@@ -1,0 +1,63 @@
+{
+  "kind": "derived_allowlisted_summary_not_original_audit_report",
+  "original_report_filename": "coordinated-pageable656-five-v1.independent-audit.json",
+  "original_report_sha256": "82385684d0c5bd6d86b92b29bdb5e3dce11a7add8460080fc11d9b0711d37790",
+  "original_auditor_filename": "audit_coordinated_pageable_evidence.py",
+  "original_auditor_sha256": "79d590bb7ab8f29f0bc2d1ff25284cd76a84db2b3257c2dcc5c44027ddca5656",
+  "audited_utc": "2026-09-22T10:36:02.970994+00:00",
+  "status": "VERIFIED_COMPLETE",
+  "cohort_id": "coordinated-pageable656-five-v1",
+  "fixed_head": "d7b6a09512010189292974b3a9b9f19c111d9b38",
+  "fixed_parent": "7f6f968dea96b9c5219affc4b6c0a678cf1d57c0",
+  "fixed_steps": 656,
+  "fixed_seeds": [
+    42,
+    43,
+    44,
+    45,
+    46
+  ],
+  "fixed_execution_order": [
+    43,
+    42,
+    44,
+    45,
+    46
+  ],
+  "verified_count": 5,
+  "all_five_evidence_verified": true,
+  "global_errors": [],
+  "unfinalized_pins": [],
+  "five_seed_metrics": {
+    "n": 5,
+    "mean_seconds": 25.0054,
+    "range_seconds": 0.108,
+    "min_seconds": 24.941,
+    "max_seconds": 25.049,
+    "sample_sd_seconds": 0.04006619522739857,
+    "mean_loss": 3.27388,
+    "sample_sd_loss": 0.0019018412131405825,
+    "max_loss": 3.2769
+  },
+  "numerical_goal_conditions": {
+    "all_losses_le_3_28": true,
+    "mean_seconds_le_25": false,
+    "range_seconds_le_5": true
+  },
+  "goal_pass": false,
+  "one_sided_loss_t_test": {
+    "alternative": "population mean final loss < 3.28",
+    "null_boundary_loss": 3.28,
+    "n": 5,
+    "degrees_of_freedom": 4,
+    "statistic_definition": "margin_t=(3.28-sample_mean)/(sample_sd/sqrt(5)); upper-tail Student t(4)",
+    "assumptions": "Independent losses and approximately normal sampling distribution; fixed five seeds and one observation each do not establish these assumptions.",
+    "status": "AVAILABLE_DF4_CLOSED_FORM",
+    "t_statistic": 7.195519756194512,
+    "p_value": 0.0009883790108189405,
+    "sample_mean_loss": 3.27388,
+    "sample_sd_loss": 0.0019018412131405825,
+    "method": "u=t/sqrt(4+t*t); p=0.5-(3*u-u**3)/4",
+    "scipy_crosscheck": "UNAVAILABLE_SCIPY_NOT_INSTALLED"
+  }
+}
