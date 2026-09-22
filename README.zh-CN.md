@@ -28,40 +28,24 @@
 
 完整结果见[机器可读记录](results/cohorts.json)及[证据说明](docs/EVIDENCE.md)。
 
-## 与官方已认可的 SOTA 比较
+## 性能对比
 
-截至 **2026-09-23**，[官方 Track 1 纪录榜](https://github.com/KellerJordan/modded-nanogpt#world-record-history)的最新成绩为 **@jvarho 的 Canonical Token Masking**，耗时 **1.126 分钟（约 67.56 秒）**，对应的 [PR #350](https://github.com/KellerJordan/modded-nanogpt/pull/350) 已合并。
+核查日期：**2026-09-23**。以下比较 **8×H100、FineWeb loss≤3.28** 的训练耗时；标有 **≈** 的耗时由榜单中四舍五入的分钟数换算。加速比为各方案耗时除以 ForgeMatch 的五个 seed 平均耗时。
 
-| 策略 | 训练耗时 | 硬件 | 目标 loss |
-|---|---:|---|---:|
-| **官方 SOTA — Canonical Token Masking** | **约 67.56 秒** | 8×H100 | ≤3.28 |
-| **ForgeMatch — ScienceGuru + Guru Turbo 1.2** | **24.8998 秒** | 8×H100 | ≤3.28 |
+| 策略 | 团队与机构 | 训练耗时 | ForgeMatch 加速比 |
+|---|---|---:|---:|
+| **[ForgeMatch，652 步](results/cohorts.json)** | **ScienceGuru + Guru Turbo 1.2** | **24.8998 秒** | — |
+| [ANVIL2](https://github.com/KellerJordan/modded-nanogpt/pull/360) | Hyperstition，原 Social Physics Lab | **39.914 秒** | **1.603×** |
+| [Exact-match](https://github.com/hermabr/modded-nanogpt-public/blob/3e92b0e28293dcb184197da1a0ce1f543e84f76c/records/track_1_short/2026-09-16_ExactMatch/this_pr/statistics.md) | hermabr | **47.2056 秒** | **1.896×** |
+| **[官方 SOTA · Canonical Token Masking](https://github.com/KellerJordan/modded-nanogpt/pull/350)** | @jvarho | **≈67.56 秒** | **≈2.713×** |
+| [ReLU² kernel 优化](https://github.com/KellerJordan/modded-nanogpt/pull/322) | Recursive | **≈75.36 秒** | **≈3.027×** |
+| [PACEvolve](https://arxiv.org/pdf/2601.10657v3) | Google + Google DeepMind、威斯康星大学麦迪逊分校、UC San Diego | **140.2 秒** | **5.631×** |
+| [NorMuon](https://github.com/KellerJordan/modded-nanogpt/pull/144) | Georgia Tech + Microsoft | **≈140.70 秒** | **≈5.651×** |
+| [梯度 all-reduce 优化](https://github.com/KellerJordan/modded-nanogpt#world-record-history) | Stanford 关联的 Enigma 项目 | **≈179.40 秒** | **≈7.205×** |
 
-相较官方 SOTA 公布的耗时，ForgeMatch **耗时降低约 63.14%，加速约 2.713 倍，节省约 42.66 秒**。参考秒数由榜单中已四舍五入的分钟数换算，ForgeMatch 采用五个 seed 的实测均值。
+相较官方 SOTA，ForgeMatch **耗时降低约 63.14%，加速约 2.713 倍，节省约 42.66 秒**。该纪录在[官方 Track 1 榜单](https://github.com/KellerJordan/modded-nanogpt#world-record-history)中的成绩为 1.126 分钟，对应 [PR #350](https://github.com/KellerJordan/modded-nanogpt/pull/350) 已合并。
 
-## 与公开方案比较
-
-| 策略 | 公开平均耗时 | 平均 loss | 次数 | ForgeMatch 耗时降幅 |
-|---|---:|---:|---:|---:|
-| [ANVIL2](https://github.com/KellerJordan/modded-nanogpt/pull/360) | 39.914 秒 | 3.277311 | 18 | **37.62% / 1.603× 加速** |
-| [Exact-match](https://github.com/hermabr/modded-nanogpt-public/blob/3e92b0e28293dcb184197da1a0ce1f543e84f76c/records/track_1_short/2026-09-16_ExactMatch/this_pr/statistics.md) | 47.2056 秒 | 3.26556 | 5 | **47.25% / 1.896× 加速** |
-| **ForgeMatch，652 步** | **24.8998 秒** | **3.27498** | **5** | — |
-
-以上采用 **loss≤3.28 门槛**，对比各来源在各自机器上报告的平均耗时，样本数与实际 loss 列于表中。两种原策略的同机 seed-42 复现结果与来源详见[策略比较](docs/STRATEGY.md#comparisons)。
-
-## 知名机构及研究团队的公开 baseline
-
-核查日期：**2026-09-23**。以下采用 **8×H100、FineWeb loss≤3.28** 的训练计时任务。标有“约”的秒数由榜单中已四舍五入的分钟数换算。
-
-| 机构关联 | 策略 | 公开耗时 |
-|---|---|---:|
-| Google + Google DeepMind、威斯康星大学麦迪逊分校、UC San Diego | [PACEvolve](https://arxiv.org/pdf/2601.10657v3) | **140.2 秒** |
-| Georgia Tech + Microsoft | [NorMuon](https://github.com/KellerJordan/modded-nanogpt/pull/144) | **约 140.70 秒** |
-| Stanford 关联的 Enigma 项目 | [梯度 all-reduce 优化](https://github.com/KellerJordan/modded-nanogpt#world-record-history) | **约 179.40 秒** |
-| Recursive | [ReLU² kernel 优化](https://github.com/KellerJordan/modded-nanogpt/pull/322) | **约 75.36 秒** |
-| Hyperstition，原 Social Physics Lab | [ANVIL2](https://github.com/KellerJordan/modded-nanogpt/pull/360) | **39.914 秒** |
-
-机构关联、日期、原始来源及 OpenAI/Anthropic 模型的优化器赛道结果详见 [baseline 文档](docs/BASELINES.md)。
+ANVIL2 为 18 次运行的均值，平均 loss 3.277311；Exact-match 为 5 次运行的均值，平均 loss 3.26556。同机 seed-42 复现详见[策略比较](docs/STRATEGY.md#comparisons)；机构关联、实验配置及 OpenAI/Anthropic 模型的优化器赛道结果详见 [baseline 文档](docs/BASELINES.md)。
 
 ## 重要程度与考察内容
 

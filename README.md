@@ -32,40 +32,24 @@ The metric is the final `train_time`: training, content-dependent retrieval cons
 
 See [machine-readable results](results/cohorts.json) and the [evidence guide](docs/EVIDENCE.md).
 
-## Comparison with the official SOTA
+## Performance comparison
 
-As of **2026-09-23**, the latest result in the [official Track 1 record history](https://github.com/KellerJordan/modded-nanogpt#world-record-history) is **Canonical Token Masking by @jvarho**, at **1.126 minutes (≈67.56 seconds)**. Its [PR #350](https://github.com/KellerJordan/modded-nanogpt/pull/350) is merged.
+Results checked on **2026-09-23**, for **8×H100 / FineWeb loss ≤3.28**, ordered by training time. Each reference uses its source's reported time; ForgeMatch uses its five-seed mean. Values marked **≈** are converted from rounded leaderboard minutes.
 
-| Strategy | Training time | Hardware | Target loss |
-|---|---:|---|---:|
-| **Official SOTA — Canonical Token Masking** | **≈67.56 s** | 8× H100 | ≤3.28 |
-| **ForgeMatch — ScienceGuru + Guru Turbo 1.2** | **24.8998 s** | 8× H100 | ≤3.28 |
+| Strategy | Team / affiliation | Training time | ForgeMatch speedup |
+|---|---|---:|---:|
+| **ForgeMatch, 652 steps** | **ScienceGuru + Guru Turbo 1.2** | **24.8998 s** | — |
+| [ANVIL2](https://github.com/KellerJordan/modded-nanogpt/pull/360) | Hyperstition, formerly Social Physics Lab | **39.914 s** | **1.603×** |
+| [Exact-match](https://github.com/hermabr/modded-nanogpt-public/blob/3e92b0e28293dcb184197da1a0ce1f543e84f76c/records/track_1_short/2026-09-16_ExactMatch/this_pr/statistics.md) | hermabr | **47.2056 s** | **1.896×** |
+| [**Official SOTA — Canonical Token Masking**](https://github.com/KellerJordan/modded-nanogpt/pull/350) | modded-nanogpt / @jvarho | **≈67.56 s** | **≈2.713×** |
+| [ReLU² kernel contribution](https://github.com/KellerJordan/modded-nanogpt/pull/322) | Recursive | **≈75.36 s** | **≈3.027×** |
+| [PACEvolve](https://arxiv.org/pdf/2601.10657v3) | Google + Google DeepMind, UW–Madison, UC San Diego | **140.2 s** | **5.631×** |
+| [NorMuon](https://github.com/KellerJordan/modded-nanogpt/pull/144) | Georgia Tech + Microsoft | **≈140.70 s** | **≈5.651×** |
+| [Faster gradient all-reduce](https://github.com/KellerJordan/modded-nanogpt#world-record-history) | Stanford-associated Enigma project | **≈179.40 s** | **≈7.205×** |
 
-ForgeMatch uses **approximately 63.14% less training time**, a **2.713× speedup** against the published official SOTA time, saving **about 42.66 seconds**. The reference seconds are converted from the leaderboard's rounded minutes; ForgeMatch is the measured five-seed mean.
+The [official Track 1 record history](https://github.com/KellerJordan/modded-nanogpt#world-record-history) lists Canonical Token Masking at **1.126 minutes**, with [PR #350](https://github.com/KellerJordan/modded-nanogpt/pull/350) merged. Against that published time, ForgeMatch uses **approximately 63.14% less training time**, a **2.713× speedup**, saving **about 42.66 seconds**.
 
-## Comparison with public strategies
-
-| Strategy | Reported mean time | Reported mean loss | Runs | ForgeMatch time reduction |
-|---|---:|---:|---:|---:|
-| [ANVIL2](https://github.com/KellerJordan/modded-nanogpt/pull/360) | 39.914 s | 3.277311 | 18 | **37.62% / 1.603×** |
-| [Exact-match](https://github.com/hermabr/modded-nanogpt-public/blob/3e92b0e28293dcb184197da1a0ce1f543e84f76c/records/track_1_short/2026-09-16_ExactMatch/this_pr/statistics.md) | 47.2056 s | 3.26556 | 5 | **47.25% / 1.896×** |
-| **ForgeMatch, 652 steps** | **24.8998 s** | **3.27498** | **5** | — |
-
-The comparison uses the **loss ≤3.28 threshold** and each source's reported mean on its respective machine. Sample counts and achieved losses appear above; sources and same-machine seed-42 reproductions are in [Strategy](docs/STRATEGY.md#comparisons).
-
-## Research-group baselines
-
-Results checked on **2026-09-23**, for **8×H100 / FineWeb loss ≤3.28**. Approximate seconds are converted from rounded leaderboard minutes.
-
-| Research affiliation | Method | Public time |
-|---|---|---:|
-| Google + Google DeepMind, UW–Madison, UC San Diego | [PACEvolve](https://arxiv.org/pdf/2601.10657v3) | **140.2 s** |
-| Georgia Tech + Microsoft | [NorMuon](https://github.com/KellerJordan/modded-nanogpt/pull/144) | **≈140.70 s** |
-| Stanford-associated Enigma project | [Faster gradient all-reduce](https://github.com/KellerJordan/modded-nanogpt#world-record-history) | **≈179.40 s** |
-| Recursive | [ReLU² kernel contribution](https://github.com/KellerJordan/modded-nanogpt/pull/322) | **≈75.36 s** |
-| Hyperstition, formerly Social Physics Lab | [ANVIL2](https://github.com/KellerJordan/modded-nanogpt/pull/360) | **39.914 s** |
-
-Affiliations, dates, source details, and optimizer-track results for OpenAI/Anthropic models are in [Research baselines](docs/BASELINES.md).
+ANVIL2 reports 18 runs with mean loss **3.277311**; Exact-match reports five runs with mean loss **3.26556**. ForgeMatch's time reductions against their published means are **37.62%** and **47.25%**, respectively. Same-machine seed-42 reproductions are in [Strategy](docs/STRATEGY.md#comparisons); affiliations, dates, source details, and optimizer-track results for OpenAI/Anthropic models are in [Research baselines](docs/BASELINES.md).
 
 ## What this benchmark establishes
 
