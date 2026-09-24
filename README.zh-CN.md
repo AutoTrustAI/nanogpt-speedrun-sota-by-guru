@@ -1,97 +1,136 @@
-# ScienceGuru：NanoGPT 训练仅需 24.8998 秒，较官方 SOTA 加速约 2.71 倍
+**AUTOTRUST AI  ·  SCIENCEGURU  ·  研究**
 
-**AutoTrust 的 ScienceGuru 科研平台使用 Guru Turbo 1.2 模型，将 8×H100 上的 NanoGPT Speedrun 训练时间压至 25 秒以内。** 平均用时为 **24.8998 秒**，达到验证 loss ≤3.28 的质量目标。在相同质量门槛下，相较官方 SOTA 的约 67.56 秒，**耗时降低约 63.14%，节省约 42.66 秒**。[成绩与对比来源](docs/BASELINES.md)。
+# ScienceGuru 将 NanoGPT Speedrun 缩短至 24.9 秒
 
-| 平均训练时间 | 相较官方 SOTA 加速 | 训练耗时降低 |
-|---:|---:|---:|
-| **24.8998 秒** | **≈2.71×** | **≈63.14%** |
+运行 Guru Turbo 1.2 的 AutoTrust 科研平台，在八张 H100 上用 24.90 秒将 GPT-2 Small 训练至 3.28 的验证损失目标：训练速度达到当前官方纪录的 2.71×。
 
-自 2024 年以来，这项基准已累积 **91 条官方历史纪录，另有两次重计时**。每一次新进展，都需要继续优化经过社区多年打磨的训练系统；下图将我们的成绩放在这一持续演进的历史中。
+2026 年 9 月 25 日  ·  ScienceGuru  ·  Guru Turbo 1.2  ·  NanoGPT Speedrun
 
-![NanoGPT Speedrun 成绩历史：91 条官方纪录与两项公开成绩，最后展示 AutoTrust 的 ScienceGuru 使用 Guru Turbo 1.2 取得的 24.8998 秒成绩。](assets/speedrun-history.svg)
+今天，我们发布 ScienceGuru 在 NanoGPT Speedrun 上的成绩。这个开放基准关注的是：将一个 GPT-2 规模的模型训练至固定质量门槛，最快需要多久。运行 Guru Turbo 1.2 的 ScienceGuru，在八张 H100 GPU 上以平均 24.90 秒的用时，将模型训练至平均验证损失 3.2750；实验使用五个预注册随机种子，并保留每一次运行的结果。
 
-[图表数据与来源](docs/SPEEDRUN_CHART.md) · [完整历史 PNG](assets/speedrun-history.png) · [近一年放大版](assets/speedrun-history-recent.png)
+这一速度是当前官方纪录 Canonical Token Masking（#91，约 67.56 秒）的 2.71×，也是我们核查过的最快开放投稿 ANVIL2（39.91 秒）的 1.60×。代码、日志、源码哈希和验证脚本已在 [github.com/AutoTrustAI/nanogpt-speedrun-sota-by-guru](https://github.com/AutoTrustAI/nanogpt-speedrun-sota-by-guru) 公开。
 
-[English](README.md) · [复现指南](docs/REPRODUCE.md) · [策略说明](docs/STRATEGY.md) · [证据说明](docs/EVIDENCE.md) · [研究 baseline](docs/BASELINES.md) · [领先团队背景](docs/TEAMS.md) · [基准规则](docs/COMPLIANCE.md)
+![ScienceGuru 的 NanoGPT Speedrun 成绩](assets/blog-nanogpt-scorecard.png)
 
-## AutoTrust、ScienceGuru 与 Guru Turbo 1.2
+*8×H100 上五个随机种子的平均值。该成绩为自行报告，目前尚未成为排行榜接受的纪录。*
 
-### AutoTrust
+## 为什么选择 NanoGPT Speedrun
 
-[**AutoTrust**](https://autotrust.ai/about) 是一家位于新加坡的应用 AI 研究实验室，致力于开发服务科学研究的人工智能系统。研究方向涵盖科研智能体、长程任务、自我改进的编程智能体、开放式算法与 AI 科学家。团队将真实科研工作中的任务轨迹用于改进模型训练、推理与智能体编排，让模型能力的发展与实际研究问题相互促进。
+Speedrun 固定了数据、硬件和目标，即在一个 8×H100 节点上达到不高于 3.28 的 FineWeb 验证损失，并且只衡量训练时间。任何提升都必须经得起一个已被社区优化两年多的代码库的检验：通过对优化器、架构、数值精度、内核、通信和数据加载的改进，91 项官方纪录已将训练时间从 45 分钟缩短到约 67.6 秒。
 
-### ScienceGuru
+因此，它是对自动化科研的一项严格检验。今年 6 月，[Recursive 报告了](https://www.recursive.com/articles/first-steps-toward-automated-ai-research)其自动化科研系统取得的 77.5 秒方案，其更快的 ReLU² 内核成为官方纪录 #87。
 
-[**ScienceGuru**](https://scienceguru.ai/) 是 AutoTrust 的科研工作空间，提供网页端与桌面端，将团队的模型能力融入文献阅读、科研推理和科学写作。它围绕连续的研究流程组织这些能力，帮助研究者从理解已有工作、分析研究问题，推进到整理和表达研究成果。本仓库将这一研究方向应用于语言模型训练效率优化，公开 NanoGPT 的具体训练策略、实验结果和复现材料。
+![NanoGPT Speedrun 的官方纪录、开放投稿与 ScienceGuru 成绩](assets/blog-nanogpt-history.png)
 
-### Guru Turbo 1.2
+*自 2025 年 10 月以来的官方 Track 1 纪录、两项开放投稿和 ScienceGuru 的五种子平均值，采用对数刻度。官方时间由排行榜中经过舍入的分钟数换算而来。*
 
-**Guru Turbo 1.2** 是本次 ScienceGuru 研究项目使用的模型。AutoTrust 的 [**Guru 模型系列**](https://autotrust.ai/models) 包括 Nano、Pro 与 Turbo，面向科研智能体与需要持续推进的研究任务，通过科研任务轨迹和合成科学数据改进能力。在本项目中，Guru Turbo 1.2 用于 NanoGPT 训练策略的研究与代码工作；基准计时对象是 [`model/`](model/) 中归档的小型语言模型的训练过程。
+## ScienceGuru 改了什么
 
-ScienceGuru 的训练方案结合训练语料的因果前缀检索、稀疏 n-gram embedding、FP8 计算和紧凑训练日程，并通过 CPU 绑核、异步预取与协调内存管理减少 GPU 等待和时间波动。
+这个结果并非来自单一技巧。ScienceGuru 从最前沿出发，以两个最快的公开投稿为起点，它们仍处于开放的拉取请求状态。ScienceGuru 将两者融合，借助融合后的模型将训练计划几乎缩短一半，然后重新调整那些决定八张 GPU 是否会闲置等待的主机端系统。Speedrun 的规则明确鼓励基于开放的拉取请求继续开发，仓库中也对两位作者作了致谢。
 
-## 已核验成绩
+### 1. 融合两项开放投稿
 
-由 **AutoTrust · ScienceGuru · Guru Turbo 1.2** 跑出的 652 步方案，平均训练用时 **24.8998 秒**，平均验证 loss 为 **3.27498**。结果在完整的 **10,485,760-token** 验证集上使用全词表概率计算。
+Deven Pietrzak 的 [ANVIL2](https://github.com/KellerJordan/modded-nanogpt/pull/360) 是一个快速训练系统：它采用采样 softmax 训练、拥有 84.6 百万行的哈希 n-gram 嵌入表、ANVIL 优化器、全栈 FP8、混合宽度注意力，以及通过 CUDA 图捕获的训练步骤。Herman Brunborg 的 [Exact-match](https://github.com/KellerJordan/modded-nanogpt/pull/367) 则增加了另一种记忆：在 CPU 上为训练数据建立索引，找出当前上下文在此前数据中的最长匹配，并将匹配片段后续的 token 作为可学习向量，添加到网络的输入、中间和输出位置。
 
-成绩采用最终 validation 行的 `train_time`，计入训练、训练内容的读取、建库、查询与必要收尾。编译、预热和最终模型验证在该计时区间之外，详见[计时说明](docs/COMPLIANCE.md#timing-boundary)。
+两者无法直接组合。ANVIL2 的 CUDA 图会重放固定的内存地址，而 Exact-match 则在 CPU 线程上产生依赖数据的匹配结果。ScienceGuru 将检索结果设为固定形状，即每个位置一个匹配长度和四个候选 token，再将其接入 ANVIL2 捕获的图中，并使用合成的“有匹配”和“无匹配”输入对图进行预热，让两条路径都在计时开始前完成捕获。它还将检索参数注册到 ANVIL2 的优化器中，把中间注入点移到 ANVIL2 跳过的层之前，并让检索遵循真实的文档边界——这些边界在 ANVIL2 为注意力计算拆分序列之前取得。
 
-完整结果见[机器可读记录](results/cohorts.json)及[证据说明](docs/EVIDENCE.md)。
+**技术细节**
 
-## 性能对比
+#### 捕获的训练步骤中的检索
 
-核查日期：**2026-09-24 UTC**。以下比较 **8×H100、FineWeb loss≤3.28** 的训练耗时；标有 **≈** 的耗时由榜单中四舍五入的分钟数换算。加速比为各方案耗时除以 ScienceGuru 的平均耗时。
+Exact-match 的三个注入点在 ANVIL2 前向传播中的位置（摘自 `model/train_gpt.py`）：
 
-![NanoGPT 训练耗时对比：ScienceGuru 24.8998 秒、ANVIL2 39.914 秒、Exact-match 47.2056 秒、官方 SOTA 约 67.56 秒、Recursive 约 75.36 秒、PACEvolve 140.2 秒、NorMuon 约 140.70 秒、Enigma 约 179.40 秒。](assets/benchmark-comparison.svg)
+```python
+x = self.embed(input_seq)
+x = x + self.ret_site_scale_in.type_as(x) * ret_r            # input
+...
+# ANVIL skips layer 7; inject before that branch and its cache[7] write.
+if i == 7:
+    x = x + self.ret_site_scale_mid.type_as(x) * ret_r[None]  # middle
+...
+x = x + self.ret_site_scale_out.type_as(x) * ret_r[None]      # output
+x = norm(x)
+```
 
-[下载对比图 PNG](assets/benchmark-comparison.png) · [对比数据与来源](docs/BASELINES.md)
+不计时的预热交替使用合成的“有匹配”和“无匹配”输入，让 CUDA 图捕获两条路径；模型和优化器状态在计时开始前恢复：
 
-| 策略 | 团队与机构 | 训练耗时 | ScienceGuru 加速比 |
-|---|---|---:|---:|
-| **[ScienceGuru，652 步](results/cohorts.json)** | **AutoTrust · Guru Turbo 1.2** | **24.8998 秒** | — |
-| [ANVIL2](https://github.com/KellerJordan/modded-nanogpt/pull/360) | Hyperstition，原 Social Physics Lab | **39.914 秒** | **1.603×** |
-| [Exact-match](https://github.com/hermabr/modded-nanogpt-public/blob/3e92b0e28293dcb184197da1a0ce1f543e84f76c/records/track_1_short/2026-09-16_ExactMatch/this_pr/statistics.md) | Herman Brunborg / Stanford 博士生 | **47.2056 秒** | **1.896×** |
-| **[官方 SOTA · Canonical Token Masking](https://github.com/KellerJordan/modded-nanogpt/pull/350)** | Jan Varho / Fluentia | **≈67.56 秒** | **≈2.713×** |
-| [ReLU² kernel 优化](https://github.com/KellerJordan/modded-nanogpt/pull/322) | Recursive | **≈75.36 秒** | **≈3.027×** |
-| [PACEvolve](https://arxiv.org/pdf/2601.10657v3) | Google + Google DeepMind、威斯康星大学麦迪逊分校、UC San Diego | **140.2 秒** | **5.631×** |
-| [NorMuon](https://github.com/KellerJordan/modded-nanogpt/pull/144) | Georgia Tech + Microsoft | **≈140.70 秒** | **≈5.651×** |
-| [梯度 all-reduce 优化](https://github.com/KellerJordan/modded-nanogpt#world-record-history) | Stanford 关联的 Enigma 项目 | **≈179.40 秒** | **≈7.205×** |
+```python
+# Alternate absent/present synthetic matches; all learned state is restored below.
+_warm_ret = (torch.full_like(inputs, 8 if step % 2 else 0, dtype=torch.int64),
+             (inputs.long()[:, None].expand(-1, 4).contiguous() if step % 2 else
+              torch.full((inputs.numel(), 4), -1, dtype=torch.int64, device=device)))
+_CG.fwd(step, inputs, targets, cum_seqlens, _bg_fwd, _warm_ret)
+```
 
-相较官方 SOTA，ScienceGuru **耗时降低约 63.14%，加速约 2.713 倍，节省约 42.66 秒**。该纪录在[官方 Track 1 榜单](https://github.com/KellerJordan/modded-nanogpt#world-record-history)中的成绩为 1.126 分钟，对应 [PR #350](https://github.com/KellerJordan/modded-nanogpt/pull/350)。
+### 2. 将训练计划几乎缩短一半
 
-同机复现详见[策略比较](docs/STRATEGY.md#comparisons)；机构关联、实验配置及 OpenAI/Anthropic 模型的优化器赛道结果详见 [baseline 文档](docs/BASELINES.md)。
+检索从第一步起就提供下一个 token 的证据，因此融合后的模型能够更早达到目标。ScienceGuru 将 ANVIL2 的完整训练计划从 1,194 步按比例缩减至 656 步，再缩减至 652 步，同时保持各阶段结构不变。最终计划使用 180.9 百万个 token 训练网络。与 Exact-match 一样，检索索引本身由全部 103 个 FineWeb 训练分片构建，且构建过程计入计时区间。
 
-## 领先贡献者的背景
+### 3. 持续为 GPU 提供数据
 
-| 贡献者 | 公开背景 | 本次对比中的成绩 |
-|---|---|---|
-| **Jan Varho · Canonical Token Masking** | [个人网站](https://jan.varho.org/)介绍其为 Fluentia 软件开发者。 | **≈67.56 秒** |
-| **Hyperstition · Deven Pietrzak** | [ANVIL2 项目说明](https://github.com/KellerJordan/modded-nanogpt/pull/360)自述其背景为“MIT Math”；Hyperstition 前身为 Social Physics Lab。 | **39.914 秒** |
-| **Herman Brunborg · Exact-match** | [GitHub 主页](https://github.com/hermabr)介绍其为 Stanford 博士生。 | **47.2056 秒** |
-| **Recursive · Cong Lu** | [个人网站](https://www.conglu.co.uk/)介绍其为 Recursive 创始团队成员，曾任 Google DeepMind 研究科学家。 | **≈75.36 秒** |
+检索在 CPU 上运行，因此最后的提升来自系统层面的工作：
 
-各团队的技术方法、原始来源与比较范围见[领先团队背景](docs/TEAMS.md)；本实现继承的代码与方法见[来源署名与致谢](CREDITS.md)。
+- **NUMA 感知的进程放置。** 每张 GPU 的进程都运行在其所属 CPU 插槽的 13 个物理核心上，并在 PyTorch 启动工作线程池之前完成设置。
+- **延后 CUDA 等待。** 预取批次携带其就绪事件，训练步骤只在首次使用时等待该事件。
+- **有界异步复制。** 更大的锁页缓冲区和对在途复制数量的限制，让检索结果能够持续传输到 GPU，而不会阻塞加载器。
+- **协调索引释放。** 在任何 rank 释放自身索引之前，所有 rank 都先确认自己的查询已完成。
+- **可分页的原始分片。** 大型 CPU 分片不再整体锁页；只对向 GPU 提供数据的逐批次缓冲区锁页。
 
-## 重要程度与考察内容
+在同一台机器上测量，这些步骤将五种子平均用时从 25.28 秒降至 25.01 秒，而 652 步训练计划进一步将其降至 24.90 秒。
 
-**它在小型语言模型训练效率、GPU 系统优化和自动化研究评估中具有较高参考价值。** 任务开放、质量目标固定，改动可追溯到源码和日志，适合反复验证优化思路。Google/DeepMind 的 PACEvolve、METR 和 Prime Intellect 都将它用于研究评估。Muon 系列展示了部分优化思想向更大模型迁移的价值。[相关研究](docs/BASELINES.md#benchmark-significance-and-scope)
+**技术细节**
 
-| 考察维度 | 具体内容 |
-|---|---|
-| 收敛效率 | 优化器、学习率、初始化、训练日程，能否用更少更新达到指定 loss |
-| 模型与目标设计 | 注意力、残差、embedding、辅助预测目标等设计 |
-| GPU 与分布式效率 | BF16/FP8、Triton/CUDA kernel、算子融合、通信与计算重叠 |
-| 数据与主机协作 | 数据加载、CPU 绑核、预取、内存分配、H2D 传输与 GPU 等待 |
-| 实验与复现质量 | 多次运行、统计显著性、同机对照、计时边界、源码与日志可核查 |
+#### 延后 CUDA 等待
 
-主赛道以达到指定质量的训练时间计分；优化器赛道以固定模型、数据和 batch size 下的训练步数计分。
+预取线程在一个批次的复制操作发出后记录一个事件。训练循环只在该批次首次被 GPU 使用时等待该事件，而不是让更早的工作等待未来的批次（`model/retrieval.py`）：
 
-## 核心策略
+```python
+def wait_for_batch(batch):
+    """Transfer a prefetched batch's CUDA ownership at its first real consumer."""
+    ready = batch[8]
+    if ready is not None:
+        consumer_stream = torch.cuda.current_stream(batch[0].device)
+        consumer_stream.wait_event(ready)
+        for tensor in (*batch[:4], *batch[7]):
+            tensor.record_stream(consumer_stream)
+```
 
-模型从训练前缀中检索候选后续 token，将匹配长度与候选 embedding 转化为可学习特征，在网络输入、中间层和输出处使用。652 步训练日程配合 FP8 计算和稀疏参数更新，在目标 loss 下缩短训练时间。CPU 绑核、延后至实际使用时的 CUDA 等待、各 rank 协调释放索引，以及普通 CPU 内存中的原始 shard，进一步减少主机与 GPU 的协作开销。实际 H2D 传输使用 pinned 小批次缓冲；查询先于当前 step 数据入库，完整验证与计时边界保持不变。详见[策略说明](docs/STRATEGY.md)。
+![ScienceGuru 在同一台机器上的实验进展](assets/blog-nanogpt-research-loop.png)
 
-参考环境为 **8×H100 80GB HBM3、双路 Xeon Platinum 8481C、约 1.8 TiB 主机内存**。完整检索使用 **103 个训练 shard**，另需一个验证 shard。CPU 绑核针对该机器拓扑，迁移到其他机器前应按[复现指南](docs/REPRODUCE.md)核查。
+*同一台机器上的测量结果。原始 ANVIL2 和 Exact-match 数值来自随机种子 42 的单次运行；ScienceGuru 各行是五种子平均值。*
 
-[`model/`](model/) 保存 33 份逐字节一致的归档源码；[`provenance/source-files.json`](provenance/source-files.json) 记录其 SHA256。`model/README.md` 是继承的历史文档，运行本策略请以本仓库的[复现指南](docs/REPRODUCE.md)为准。
+## 我们如何验证
 
-[来源署名与致谢](CREDITS.md) · [MIT 许可证](LICENSE)
+速度成绩很容易出错，因此这份发布包从设计上就便于核查：
+
+- **预注册随机种子。** 在首次运行之前就固定了随机种子 42 至 46，并报告每一次运行。五次运行的损失均不高于 3.28（平均 3.27498，最差 3.2777）。针对 3.28 的单侧 t 检验得到 p ≈ 0.0019（t = 6.06，自由度为四），满足 Speedrun 的 p < 0.01 规则。另一个 656 步实验组平均用时 25.01 秒（p ≈ 0.001）。
+- **沿用上游计时边界。** 与所有纪录一样，编译、预热和最终验证的前向传播不计入时间。检索索引构建、每一次检索查询、跨 rank 合并、线程汇合和最终同步均计入时间。
+- **因果检索。** 每个训练步骤先查询，再插入自身的 token。验证索引仅包含训练分片，验证目标从不插入其中。
+- **数据保持不变。** 官方 token 文件经过哈希核验，并通过一项包含 173 个案例的对比测试检查修改后的加载器。
+- **固定源码。** 33 个源文件与实验提交 `d7b6a095` 逐字节一致。运行 `python3 scripts/verify_results.py`，即可在 CPU 上重新核查每个哈希、每次运行和每项统计量。
+
+## 范围与注意事项
+
+- 这是自行报告的成绩，并非排行榜接受的纪录。它基于两个开放的拉取请求，而维护者尚未审查这两个请求。
+
+- 检索索引覆盖完整训练集，而网络使用 180.9 百万个 token 进行训练。维护者尚未对这种检索方式作出裁定；Exact-match 的拉取请求目前还没有收到审查。
+
+- 与 ANVIL2 和 Exact-match 的对比使用的是它们在其他机器上公布的平均值；我们在同一台机器上的复现是单次运行。最终实验组的随机种子在开发期间也曾使用。
+
+- CPU 放置方案针对我们的主机进行了调优：两颗 Xeon Platinum 8481C CPU，以及约 1.8 TiB 内存。
+
+## 下一步
+
+这是 ScienceGuru 本月在开放科研基准上发布的第三项成果。在 Autoresearch@Home 这一五分钟 NanoChat 基准上，Recursive 于 6 月报告的 10 个种子的平均成绩为 0.9109 比特/字节，而搭载 Guru Turbo 1.0 的 ScienceGuru 达到了 [0.889522](https://github.com/AutoTrustAI/autoresearch-sota-strategy)，截至 9 月 1 日位列官方排行榜 #1。在 MedARC 的 NanoPath v2 上，维护者独立重新训练了 ScienceGuru 的方案后，该方案以 0.6597 的成绩成为[经过验证的可训练方案第一名](https://github.com/AutoTrustAI/nanopath-sota-strategy)。
+
+每一次这样的运行都会留下经过验证的科研轨迹，而 AutoTrust 会使用这些轨迹训练未来的 Guru 模型。完成这项工作的系统，也在产生将帮助它持续改进的数据。
+
+### SCIENCEGURU
+
+将取得这一成果的系统用于你自己的研究。在 [ScienceGuru.ai](https://scienceguru.ai) 下载 ScienceGuru。
+
+[下载 ScienceGuru →](https://scienceguru.ai)
+
+代码、日志和验证：[github.com/AutoTrustAI/nanogpt-speedrun-sota-by-guru](https://github.com/AutoTrustAI/nanogpt-speedrun-sota-by-guru)
+
+社区纪录：[github.com/KellerJordan/modded-nanogpt](https://github.com/KellerJordan/modded-nanogpt#world-record-history)（Track 1）。官方时间由排行榜中经过舍入的分钟数换算而来。

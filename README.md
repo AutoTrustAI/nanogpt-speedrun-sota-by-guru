@@ -1,91 +1,144 @@
-# ScienceGuru: NanoGPT in 24.8998 seconds — ≈2.71× speedup over the official SOTA
+**AUTOTRUST AI  ·  SCIENCEGURU  ·  RESEARCH**
 
-**AutoTrust's ScienceGuru research platform, using Guru Turbo 1.2, brings NanoGPT Speedrun training below 25 seconds on 8×H100.** Mean training time is **24.8998 seconds**, meeting the validation-loss target of **≤3.28**. At the same quality target, this uses **≈63.14% less time than the official SOTA of ≈67.56 seconds**, saving **≈42.66 seconds**. [Results and comparison sources](docs/BASELINES.md).
+# ScienceGuru Cuts the NanoGPT Speedrun to 24.9 Seconds
 
-| Mean training time | Speedup over official SOTA | Training time saved | Validation-loss target |
-|---:|---:|---:|---:|
-| **24.8998 s** | **≈2.71×** | **≈63.14%** | **≤3.28** |
+Running Guru Turbo 1.2, AutoTrust’s research platform trained GPT-2 Small to the 3.28 validation-loss target in 24.90 seconds on eight H100s: 2.71× faster than the current official record.
 
-Since 2024, the benchmark has accumulated **91 official records, plus two re-timings**. Each new improvement tackles a training system already refined by years of community optimization; the history below places our result in that progression.
+September 25, 2026  ·  ScienceGuru  ·  Guru Turbo 1.2  ·  NanoGPT Speedrun
 
-![NanoGPT Speedrun history: 91 official records and two selected public results, followed by AutoTrust's ScienceGuru result using Guru Turbo 1.2 at 24.8998 seconds.](assets/speedrun-history.svg)
+Today we are releasing ScienceGuru’s result on the NanoGPT Speedrun, the open benchmark that asks how quickly a GPT-2-sized model can be trained to a fixed quality bar. Running Guru Turbo 1.2, ScienceGuru trained the model to a mean validation loss of 3.2750 in a mean of 24.90 seconds on eight H100 GPUs, across five preregistered seeds with every run kept.
 
-[Chart data and sources](docs/SPEEDRUN_CHART.md) · [Full history PNG](assets/speedrun-history.png) · [Recent history, enlarged](assets/speedrun-history-recent.png)
+That is 2.71× faster than the current official record, Canonical Token Masking (#91, about 67.56 seconds), and 1.60× faster than ANVIL2 (39.91 seconds), the fastest open submission we checked. The code, logs, source hashes and a verification script are open at [github.com/AutoTrustAI/nanogpt-speedrun-sota-by-guru](https://github.com/AutoTrustAI/nanogpt-speedrun-sota-by-guru).
 
-[Chinese](README.zh-CN.md) · [Reproduce](docs/REPRODUCE.md) · [Strategy](docs/STRATEGY.md) · [Evidence](docs/EVIDENCE.md) · [Research baselines](docs/BASELINES.md) · [Teams and contributors](docs/TEAMS.md) · [Benchmark protocol](docs/COMPLIANCE.md)
+![ScienceGuru NanoGPT Speedrun scorecard](assets/blog-nanogpt-scorecard.png)
 
-## AutoTrust, ScienceGuru, and Guru Turbo 1.2
+*Five-seed mean on 8×H100. The result is self-reported and is not yet an accepted leaderboard record.*
 
-### AutoTrust
+## Why the NanoGPT Speed run
 
-[**AutoTrust**](https://autotrust.ai/about) is an applied AI research laboratory based in Singapore, building AI systems for scientific research. Its work spans scientific agents, long-horizon tasks, self-improving coding agents, open-ended algorithms, and AI scientists. The lab studies how trajectories from real research workflows can improve model training, inference, and agent orchestration, connecting practical scientific work with the development of more capable research systems.
+The speedrun fixes the data, the hardware and the target, a FineWeb validation loss of 3.28 or lower on one 8×H100 node, and measures only training time. Any gain has to hold up on a codebase the community has optimized for more than two years: 91 official records have taken training from 45 minutes to about 67.6 seconds, through changes to optimizers, architecture, numerical precision, kernels, communication and data loading.
 
-### ScienceGuru
+That makes it a demanding test for automated research. In June, [Recursive reported](https://www.recursive.com/articles/first-steps-toward-automated-ai-research) a 77.5-second solution from its automated research system, and its faster ReLU² kernel became official record #87.
 
-[**ScienceGuru**](https://scienceguru.ai/) is AutoTrust's research workspace, available on the web and desktop. It brings the lab's models into an environment for scientific reading, reasoning, and writing. The platform connects model capabilities to the daily work of research, supporting exploration within an ongoing scientific workflow. This NanoGPT project applies that focus to the practical challenge of optimizing a language-model training system.
+![NanoGPT Speedrun history](assets/blog-nanogpt-history.png)
 
-### Guru Turbo 1.2
+*Official Track 1 records since October 2025, two open submissions and ScienceGuru’s five-seed mean, on a log scale. Official times are converted from the leaderboard’s rounded minutes.*
 
-**Guru Turbo 1.2** is the model used in this ScienceGuru research project. AutoTrust's [**Guru family**](https://autotrust.ai/models) offers Nano, Pro, and Turbo tiers for scientific-agent workloads and sustained research tasks, drawing on scientific trajectories and synthetic scientific data for improvement. Here, Guru Turbo 1.2 is applied to the research and coding work behind the NanoGPT training strategy. The benchmark measures the training time of the small language model archived under [`model/`](model/).
+## What ScienceGuru changed
 
-The resulting strategy combines causal prefix retrieval, sparse n-gram embeddings, FP8 execution, and a compact training schedule, with CPU affinity, asynchronous prefetching, and coordinated memory management to keep the GPUs supplied with data and reduce timing variation.
+The result did not come from one trick. ScienceGuru started where the frontier was, with the two fastest public submissions, both still open pull requests. It fused them, used the fused model to cut the training schedule nearly in half, then reworked the host-side systems that decide whether eight GPUs are ever left waiting. The speedrun’s rules explicitly encourage building on open pull requests, and both authors are credited in the repository.
 
-## Verified result
+### 1. Fusing two open submissions
 
-**AutoTrust · ScienceGuru · Guru Turbo 1.2** achieved a mean training time of **24.8998 seconds** in 652 steps and a mean validation loss of **3.27498**, below the **3.28** target. Validation covers the complete **10,485,760-token** target with full-vocabulary probabilities.
+[ANVIL2](https://github.com/KellerJordan/modded-nanogpt/pull/360), by Deven Pietrzak, is a fast training system: sampled-softmax training, an 84.6-million-row hashed n-gram embedding table, the ANVIL optimizer, FP8 across the stack, mixed-width attention, and a training step captured as CUDA graphs. [Exact-match](https://github.com/KellerJordan/modded-nanogpt/pull/367), by Herman Brunborg, adds a different kind of memory: a CPU index of the training data that finds the longest earlier match of the current context and gives the model the tokens that followed it, as learned vectors added at the input, middle and output of the network.
 
-The metric is the final `train_time`: training, content-dependent retrieval construction, and required completion work are timed. Compilation, warmup, and final model validation occur outside this interval. See the [timing protocol](docs/COMPLIANCE.md#timing-boundary).
+The two do not compose out of the box. ANVIL2’s CUDA graphs replay fixed memory addresses, while Exact-match produces data-dependent matches on a CPU thread. ScienceGuru gave retrieval a fixed shape, a match length and four candidate tokens per position, wired it into ANVIL2’s captured graphs, and warmed the graphs up on synthetic “match” and “no match” inputs so that both paths are captured before the clock starts. It also registered the retrieval parameters with ANVIL2’s optimizer, moved the middle injection point ahead of the layer ANVIL2 skips, and kept retrieval on true document boundaries, taken before ANVIL2 splits sequences for attention.
 
-See [machine-readable results](results/cohorts.json) and the [evidence guide](docs/EVIDENCE.md).
+**TECHNICAL DETAIL**
 
-## Performance comparison
+#### Retrieval inside a captured training step
 
-Results checked on **2026-09-24 UTC**, for **8×H100 / FineWeb loss ≤3.28**, ordered by training time. Each reference uses its source's reported time; ScienceGuru uses its mean training time. Values marked **≈** are converted from rounded leaderboard minutes.
+Exact-match’s three injection sites, as placed in ANVIL2’s forward pass (excerpt from model/train_gpt.py):
 
-![NanoGPT training-time comparison: ScienceGuru 24.8998 seconds, ANVIL2 39.914, Exact-match 47.2056, official SOTA approximately 67.56, Recursive approximately 75.36, PACEvolve 140.2, NorMuon approximately 140.70, and Enigma approximately 179.40 seconds.](assets/benchmark-comparison.svg)
+```python
+x = self.embed(input_seq)
+x = x + self.ret_site_scale_in.type_as(x) * ret_r            # input
+...
+# ANVIL skips layer 7; inject before that branch and its cache[7] write.
+if i == 7:
+    x = x + self.ret_site_scale_mid.type_as(x) * ret_r[None]  # middle
+...
+x = x + self.ret_site_scale_out.type_as(x) * ret_r[None]      # output
+x = norm(x)
+```
 
-[Download comparison PNG](assets/benchmark-comparison.png) · [Comparison data and sources](docs/BASELINES.md)
+The untimed warmup alternates synthetic “match” and “no match” inputs, so the CUDA graphs capture both paths; model and optimizer state are restored before the clock starts:
 
-| Strategy | Team / affiliation | Training time | ScienceGuru speedup |
-|---|---|---:|---:|
-| **ScienceGuru, 652 steps** | **AutoTrust · Guru Turbo 1.2** | **24.8998 s** | — |
-| [ANVIL2](https://github.com/KellerJordan/modded-nanogpt/pull/360) | Hyperstition, formerly Social Physics Lab | **39.914 s** | **1.603×** |
-| [Exact-match](https://github.com/hermabr/modded-nanogpt-public/blob/3e92b0e28293dcb184197da1a0ce1f543e84f76c/records/track_1_short/2026-09-16_ExactMatch/this_pr/statistics.md) | Herman Brunborg / Stanford PhD student | **47.2056 s** | **1.896×** |
-| [**Official SOTA — Canonical Token Masking**](https://github.com/KellerJordan/modded-nanogpt/pull/350) | Jan Varho / Fluentia | **≈67.56 s** | **≈2.713×** |
-| [ReLU² kernel contribution](https://github.com/KellerJordan/modded-nanogpt/pull/322) | Recursive | **≈75.36 s** | **≈3.027×** |
-| [PACEvolve](https://arxiv.org/pdf/2601.10657v3) | Google + Google DeepMind, UW–Madison, UC San Diego | **140.2 s** | **5.631×** |
-| [NorMuon](https://github.com/KellerJordan/modded-nanogpt/pull/144) | Georgia Tech + Microsoft | **≈140.70 s** | **≈5.651×** |
-| [Faster gradient all-reduce](https://github.com/KellerJordan/modded-nanogpt#world-record-history) | Stanford-associated Enigma project | **≈179.40 s** | **≈7.205×** |
+```python
+# Alternate absent/present synthetic matches; all learned state is restored below.
+_warm_ret = (torch.full_like(inputs, 8 if step % 2 else 0, dtype=torch.int64),
+             (inputs.long()[:, None].expand(-1, 4).contiguous() if step % 2 else
+              torch.full((inputs.numel(), 4), -1, dtype=torch.int64, device=device)))
+_CG.fwd(step, inputs, targets, cum_seqlens, _bg_fwd, _warm_ret)
+```
 
-The [official Track 1 record history](https://github.com/KellerJordan/modded-nanogpt#world-record-history) lists Canonical Token Masking at **1.126 minutes** ([PR #350](https://github.com/KellerJordan/modded-nanogpt/pull/350)). Against that published time, ScienceGuru uses **approximately 63.14% less training time**, a **2.713× speedup**, saving **about 42.66 seconds**.
+### 2. Cutting the schedule nearly in half
 
-ANVIL2 reports mean loss **3.277311**; Exact-match reports mean loss **3.26556**. ScienceGuru's time reductions against their published means are **37.62%** and **47.25%**, respectively. Same-machine reproductions are in [Strategy](docs/STRATEGY.md#comparisons); affiliations, dates, source details, and optimizer-track results for OpenAI/Anthropic models are in [Research baselines](docs/BASELINES.md).
+With retrieval supplying next-token evidence from the first step, the fused model reaches the target much sooner. ScienceGuru rescaled the full training schedule from ANVIL2’s 1,194 steps to 656, then 652, keeping the stage structure intact. The final schedule trains the network on 180.9 million tokens. As in Exact-match, the retrieval index itself is built from all 103 FineWeb training shards, inside the timed interval.
 
-## Background of the leading contributors
+### 3. Keeping the GPUs fed
 
-| Contributor | Public background | Result in this comparison |
-|---|---|---|
-| **Jan Varho · Canonical Token Masking** | Software developer at [Fluentia, according to his personal website](https://jan.varho.org/). | **≈67.56 s** |
-| **Hyperstition · Deven Pietrzak** | The [ANVIL2 submission](https://github.com/KellerJordan/modded-nanogpt/pull/360) describes his background as “MIT Math” and names Hyperstition, formerly Social Physics Lab. | **39.914 s** |
-| **Herman Brunborg · Exact-match** | His [GitHub profile](https://github.com/hermabr) identifies him as a PhD student at Stanford. | **47.2056 s** |
-| **Recursive · Cong Lu** | A founding-team member of Recursive and former Google DeepMind research scientist, according to his [personal website](https://www.conglu.co.uk/). | **≈75.36 s** |
+Retrieval runs on the CPU, so the last gains came from systems work:
 
-See [Teams and contributors](docs/TEAMS.md) for the methods, primary sources, and comparison scope. Source contributions to this implementation are acknowledged in [Credits](CREDITS.md).
+- NUMA-aware placement. Each GPU’s process runs on 13 physical cores of its own socket, set before PyTorch starts its worker pools.
 
-## What this benchmark establishes
+- Deferred CUDA waits. A prefetched batch carries its readiness event, and the training step waits on it only at first use.
 
-NanoGPT Speedrun measures **time to a fixed language-modeling quality target**. It exercises training algorithms, model architecture, GPU kernels, distributed communication, data movement, and reproducible experimentation. Its research value includes exposing useful optimization ideas and providing an open task for evaluating autonomous research systems; Google/DeepMind, METR, and Prime Intellect have used it for this purpose. See [benchmark significance and scope](docs/BASELINES.md#benchmark-significance-and-scope).
+- Bounded asynchronous copies. Larger pinned buffers and a cap on in-flight copies let retrieval results stream to the GPUs without stalling the loader.
 
-## What is included
+- Coordinated index release. Every rank confirms its queries are done before any rank frees its index.
 
-- [`model/`](model/): the 33 archived source files, preserved byte for byte, including the Python trainer and Rust exact-match extension.
-- [`provenance/source-files.json`](provenance/source-files.json): source hashes and original experiment commit identity.
-- [`results/cohorts.json`](results/cohorts.json): measured cohorts and their status.
-- [`docs/REPRODUCE.md`](docs/REPRODUCE.md): environment, data, and launch instructions.
-- [`docs/EVIDENCE.md`](docs/EVIDENCE.md): what the packaged evidence establishes and how to verify it.
+- Pageable raw shards. Large CPU shards are no longer pinned whole; only the per-batch buffers that feed the GPUs are.
 
-The reference hardware is **8× H100 80GB HBM3**, two Xeon Platinum 8481C CPUs, and about **1.8 TiB host RAM**. The full retrieval corpus requires all **103 training shards**, plus the validation shard. The CPU affinity mapping is specific to that host topology. Follow [Reproduce](docs/REPRODUCE.md), rather than the inherited historical instructions inside `model/README.md`.
+Measured on the same machine, these steps moved the five-seed mean from 25.28 to 25.01 seconds, and the 652-step schedule brought it to 24.90.
 
-## Credits and license
+**TECHNICAL DETAIL**
 
-[Source attribution and acknowledgments](CREDITS.md) · [MIT license](LICENSE)
+#### Deferring the CUDA wait
+
+The prefetch thread records an event once a batch’s copies are issued. The training loop waits on it only when the batch is first used on the GPU, instead of making earlier work wait on a future batch (model/retrieval.py):
+
+```python
+def wait_for_batch(batch):
+    """Transfer a prefetched batch's CUDA ownership at its first real consumer."""
+    ready = batch[8]
+    if ready is not None:
+        consumer_stream = torch.cuda.current_stream(batch[0].device)
+        consumer_stream.wait_event(ready)
+        for tensor in (*batch[:4], *batch[7]):
+            tensor.record_stream(consumer_stream)
+```
+
+![ScienceGuru research loop and same-machine measurements](assets/blog-nanogpt-research-loop.png)
+
+*Same-machine measurements. The original ANVIL2 and Exact-match figures are single seed-42 runs; ScienceGuru rows are five-seed means.*
+
+## How we verified it
+
+Speed results are easy to get wrong, so the package is built to be checked:
+
+- Preregistered seeds. Seeds 42 to 46 were fixed before the first run, and every run is reported. All five losses are at or below 3.28 (mean 3.27498, worst 3.2777). A one-sided t-test against 3.28 gives p ≈ 0.0019 (t = 6.06, four degrees of freedom), inside the speedrun’s p < 0.01 rule. A second cohort at 656 steps averaged 25.01 seconds (p ≈ 0.001).
+
+- The upstream timing boundary. Compilation, warmup and the final validation forward pass are outside the clock, as in every record. Building the retrieval index, every retrieval query, cross-rank merges, thread joins and the final synchronization are inside it.
+
+- Causal retrieval. Each training step queries before its own tokens are inserted. The validation index holds training shards only, and validation targets are never inserted.
+
+- Unchanged data. The official token files were hash-checked, and a 173-case comparison tested the modified loader.
+
+- Pinned source. The 33 source files match experiment commit d7b6a095 byte for byte. Running python3 scripts/verify_results.py re-checks every hash, run and statistic on a CPU.
+
+## Scope and caveats
+
+- This is a self-reported result, not an accepted leaderboard record. It builds on two open pull requests that the maintainers have not yet reviewed.
+
+- The retrieval index covers the full training set, while the network trains on 180.9 million tokens. The maintainers have not yet ruled on retrieval of this kind; Exact-match’s pull request has no review so far.
+
+- Comparisons with ANVIL2 and Exact-match use their published means from other machines; our same-machine reproductions were single runs. The final cohort’s seeds were also used during development.
+
+- CPU placement is tuned to our host: two Xeon Platinum 8481C CPUs and about 1.8 TiB of RAM.
+
+## What’s next
+
+This is ScienceGuru’s third public result on an open research benchmark this month. On Autoresearch@Home, the five-minute NanoChat benchmark on which Recursive reported a 10-seed mean of 0.9109 bits per byte in June, ScienceGuru with Guru Turbo 1.0 reached [0.889522](https://github.com/AutoTrustAI/autoresearch-sota-strategy), #1 on the official leaderboard as of September 1. On MedARC’s NanoPath v2, its recipe became the [validated trainable leader](https://github.com/AutoTrustAI/nanopath-sota-strategy) at 0.6597 after the maintainer independently retrained it.
+
+Each of these runs leaves a verified research trajectory, and AutoTrust uses such trajectories to train future Guru models. The system that did this work is also producing the data that will improve it.
+
+### SCIENCEGURU
+
+Put the system behind this result to work on your own research. Download ScienceGuru at [ScienceGuru.ai](https://scienceguru.ai).
+
+[Download ScienceGuru →](https://scienceguru.ai)
+
+Code, logs and verification: [github.com/AutoTrustAI/nanogpt-speedrun-sota-by-guru](https://github.com/AutoTrustAI/nanogpt-speedrun-sota-by-guru)
+
+Community records: [github.com/KellerJordan/modded-nanogpt](https://github.com/KellerJordan/modded-nanogpt#world-record-history) (Track 1). Official times are converted from the leaderboard’s rounded minutes.
