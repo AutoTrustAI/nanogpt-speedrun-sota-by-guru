@@ -4,6 +4,12 @@
 
 The completed 652-step cohort averaged **24.8998 seconds**, with a **0.071-second** fastest-to-slowest spread. All five fixed seeds reached validation loss ≤3.28; the mean loss was **3.27498**, and the worst was **3.2777**. This satisfies the target of a mean ≤25 seconds and a spread ≤5 seconds.
 
+## Per-seed validation
+
+![ScienceGuru validation across seeds 42–46: every run finishes in less than 25 seconds with validation loss below 3.28.](../assets/seed-validation.svg)
+
+[Download validation PNG](../assets/seed-validation.png) · [Chart sources and regeneration](SPEEDRUN_CHART.md)
+
 | Seed | 652 steps: seconds | 652 steps: loss | 656 steps: seconds | 656 steps: loss |
 |---|---:|---:|---:|---:|
 | 42 | 24.908 | 3.2733 | 25.018 | 3.2718 |

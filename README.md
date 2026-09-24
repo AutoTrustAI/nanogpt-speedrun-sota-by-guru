@@ -1,10 +1,10 @@
 # ScienceGuru: NanoGPT in 24.8998 seconds — ≈2.71× speedup over the official SOTA
 
-**AutoTrust's ScienceGuru research platform, using Guru Turbo 1.2, brings NanoGPT Speedrun training below 25 seconds on 8×H100.** Across five seeds, mean training time is **24.8998 seconds**, and every validation loss is ≤3.28. At the same quality target, this uses **≈63.14% less time than the official SOTA of ≈67.56 seconds**, saving **≈42.66 seconds**. [Results and comparison sources](docs/BASELINES.md).
+**AutoTrust's ScienceGuru research platform, using Guru Turbo 1.2, brings NanoGPT Speedrun training below 25 seconds on 8×H100.** Mean training time is **24.8998 seconds**, meeting the validation-loss target of **≤3.28**. At the same quality target, this uses **≈63.14% less time than the official SOTA of ≈67.56 seconds**, saving **≈42.66 seconds**. [Results and comparison sources](docs/BASELINES.md).
 
-| Mean training time | Speedup over official SOTA | Training time saved | Seeds meeting loss ≤3.28 |
+| Mean training time | Speedup over official SOTA | Training time saved | Validation-loss target |
 |---:|---:|---:|---:|
-| **24.8998 s** | **≈2.71×** | **≈63.14%** | **5 / 5** |
+| **24.8998 s** | **≈2.71×** | **≈63.14%** | **≤3.28** |
 
 Since 2024, the benchmark has accumulated **91 official records, plus two re-timings**. Each new improvement tackles a training system already refined by years of community optimization; the history below places our result in that progression.
 
@@ -16,44 +16,23 @@ Since 2024, the benchmark has accumulated **91 official records, plus two re-tim
 
 ## AutoTrust, ScienceGuru, and Guru Turbo 1.2
 
-[**AutoTrust**](https://autotrust.ai/) develops AI for scientific research. Its **ScienceGuru** platform brings reading, reasoning, and writing into a research workspace. This project uses **Guru Turbo 1.2** and publishes the resulting NanoGPT training strategy, measurements, and reproducibility evidence.
+### AutoTrust
 
-| Name | Role in this project |
-|---|---|
-| **AutoTrust** | The team and brand behind the project. |
-| **ScienceGuru** | AutoTrust's research platform and the name used for this benchmark result. |
-| **Guru Turbo 1.2** | The model used for this research project. |
+[**AutoTrust**](https://autotrust.ai/about) is an applied AI research laboratory based in Singapore, building AI systems for scientific research. Its work spans scientific agents, long-horizon tasks, self-improving coding agents, open-ended algorithms, and AI scientists. The lab studies how trajectories from real research workflows can improve model training, inference, and agent orchestration, connecting practical scientific work with the development of more capable research systems.
 
-The [AutoTrust website](https://autotrust.ai/) describes the platform; the project owner confirmed the model version and roles recorded in [project attribution](provenance/project-attribution.json). The benchmark itself trains the small language model archived under [`model/`](model/).
+### ScienceGuru
 
-ScienceGuru's training strategy combines causal prefix retrieval, sparse n-gram embeddings, FP8 execution, and a compact training schedule. CPU affinity, asynchronous prefetching, and coordinated memory management keep the GPUs supplied with data and reduce timing variation.
+[**ScienceGuru**](https://scienceguru.ai/) is AutoTrust's research workspace, available on the web and desktop. It brings the lab's models into an environment for scientific reading, reasoning, and writing. The platform connects model capabilities to the daily work of research, supporting exploration within an ongoing scientific workflow. This NanoGPT project applies that focus to the practical challenge of optimizing a language-model training system.
+
+### Guru Turbo 1.2
+
+**Guru Turbo 1.2** is the model used in this ScienceGuru research project. AutoTrust's [**Guru family**](https://autotrust.ai/models) offers Nano, Pro, and Turbo tiers for scientific-agent workloads and sustained research tasks, drawing on scientific trajectories and synthetic scientific data for improvement. Here, Guru Turbo 1.2 is applied to the research and coding work behind the NanoGPT training strategy. The benchmark measures the training time of the small language model archived under [`model/`](model/).
+
+The resulting strategy combines causal prefix retrieval, sparse n-gram embeddings, FP8 execution, and a compact training schedule, with CPU affinity, asynchronous prefetching, and coordinated memory management to keep the GPUs supplied with data and reduce timing variation.
 
 ## Verified result
 
-**AutoTrust · ScienceGuru · Guru Turbo 1.2** produced this 652-step result across five fixed seeds, with every run included. All five final validation losses are below **3.28**, measured on the complete **10,485,760-token** validation target with full-vocabulary probabilities.
-
-![ScienceGuru five-seed validation: all five runs finish between 24.868 and 24.939 seconds, with mean training time 24.8998 seconds and every validation loss below 3.28.](assets/seed-validation.svg)
-
-[Download validation PNG](assets/seed-validation.png) · [Chart sources and reproduction](docs/SPEEDRUN_CHART.md)
-
-<details>
-<summary>Per-seed results and statistics</summary>
-
-| Seed | Final `train_time` (s) | Validation loss |
-|---:|---:|---:|
-| 42 | 24.908 | 3.2733 |
-| 43 | 24.898 | 3.2777 |
-| 44 | 24.868 | 3.2752 |
-| 45 | 24.939 | 3.2732 |
-| 46 | 24.886 | 3.2755 |
-| **Mean** | **24.8998** | **3.27498** |
-
-- Time range: **0.071 s**; sample standard deviation: **0.026499 s**.
-- Worst loss: **3.2777**; one-sided loss t-test against 3.28: **p ≈ 0.001868** (df = 4).
-- Fixed execution order: **43 → 42 → 44 → 45 → 46**, with all five runs included.
-- The target of mean time ≤25 s, time range ≤5 s, and all five losses ≤3.28 is met.
-
-</details>
+**AutoTrust · ScienceGuru · Guru Turbo 1.2** achieved a mean training time of **24.8998 seconds** in 652 steps and a mean validation loss of **3.27498**, below the **3.28** target. Validation covers the complete **10,485,760-token** target with full-vocabulary probabilities.
 
 The metric is the final `train_time`: training, content-dependent retrieval construction, and required completion work are timed. Compilation, warmup, and final model validation occur outside this interval. See the [timing protocol](docs/COMPLIANCE.md#timing-boundary).
 
@@ -61,7 +40,7 @@ See [machine-readable results](results/cohorts.json) and the [evidence guide](do
 
 ## Performance comparison
 
-Results checked on **2026-09-24 UTC**, for **8×H100 / FineWeb loss ≤3.28**, ordered by training time. Each reference uses its source's reported time; ScienceGuru uses its five-seed mean. Values marked **≈** are converted from rounded leaderboard minutes.
+Results checked on **2026-09-24 UTC**, for **8×H100 / FineWeb loss ≤3.28**, ordered by training time. Each reference uses its source's reported time; ScienceGuru uses its mean training time. Values marked **≈** are converted from rounded leaderboard minutes.
 
 ![NanoGPT training-time comparison: ScienceGuru 24.8998 seconds, ANVIL2 39.914, Exact-match 47.2056, official SOTA approximately 67.56, Recursive approximately 75.36, PACEvolve 140.2, NorMuon approximately 140.70, and Enigma approximately 179.40 seconds.](assets/benchmark-comparison.svg)
 
@@ -80,7 +59,7 @@ Results checked on **2026-09-24 UTC**, for **8×H100 / FineWeb loss ≤3.28**, o
 
 The [official Track 1 record history](https://github.com/KellerJordan/modded-nanogpt#world-record-history) lists Canonical Token Masking at **1.126 minutes** ([PR #350](https://github.com/KellerJordan/modded-nanogpt/pull/350)). Against that published time, ScienceGuru uses **approximately 63.14% less training time**, a **2.713× speedup**, saving **about 42.66 seconds**.
 
-ANVIL2 reports 18 runs with mean loss **3.277311**; Exact-match reports five runs with mean loss **3.26556**. ScienceGuru's time reductions against their published means are **37.62%** and **47.25%**, respectively. Same-machine seed-42 reproductions are in [Strategy](docs/STRATEGY.md#comparisons); affiliations, dates, source details, and optimizer-track results for OpenAI/Anthropic models are in [Research baselines](docs/BASELINES.md).
+ANVIL2 reports mean loss **3.277311**; Exact-match reports mean loss **3.26556**. ScienceGuru's time reductions against their published means are **37.62%** and **47.25%**, respectively. Same-machine reproductions are in [Strategy](docs/STRATEGY.md#comparisons); affiliations, dates, source details, and optimizer-track results for OpenAI/Anthropic models are in [Research baselines](docs/BASELINES.md).
 
 ## Background of the leading contributors
 

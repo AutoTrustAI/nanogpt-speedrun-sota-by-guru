@@ -1,10 +1,10 @@
 # ScienceGuru：NanoGPT 训练仅需 24.8998 秒，较官方 SOTA 加速约 2.71 倍
 
-**AutoTrust 的 ScienceGuru 科研平台使用 Guru Turbo 1.2 模型，将 8×H100 上的 NanoGPT Speedrun 训练时间压至 25 秒以内。** 五个 seed 的平均用时为 **24.8998 秒**，每次验证 loss 均 ≤3.28。在相同质量门槛下，相较官方 SOTA 的约 67.56 秒，**耗时降低约 63.14%，节省约 42.66 秒**。[成绩与对比来源](docs/BASELINES.md)。
+**AutoTrust 的 ScienceGuru 科研平台使用 Guru Turbo 1.2 模型，将 8×H100 上的 NanoGPT Speedrun 训练时间压至 25 秒以内。** 平均用时为 **24.8998 秒**，达到验证 loss ≤3.28 的质量目标。在相同质量门槛下，相较官方 SOTA 的约 67.56 秒，**耗时降低约 63.14%，节省约 42.66 秒**。[成绩与对比来源](docs/BASELINES.md)。
 
-| 平均训练时间 | 相较官方 SOTA 加速 | 训练耗时降低 | 达到 loss ≤3.28 的 seed |
-|---:|---:|---:|---:|
-| **24.8998 秒** | **≈2.71×** | **≈63.14%** | **5 / 5** |
+| 平均训练时间 | 相较官方 SOTA 加速 | 训练耗时降低 |
+|---:|---:|---:|
+| **24.8998 秒** | **≈2.71×** | **≈63.14%** |
 
 自 2024 年以来，这项基准已累积 **91 条官方历史纪录，另有两次重计时**。每一次新进展，都需要继续优化经过社区多年打磨的训练系统；下图将我们的成绩放在这一持续演进的历史中。
 
@@ -16,44 +16,23 @@
 
 ## AutoTrust、ScienceGuru 与 Guru Turbo 1.2
 
-[**AutoTrust**](https://autotrust.ai/) 面向科学研究开发 AI；**ScienceGuru** 是其科研平台，将文献阅读、推理和写作整合到一个工作空间。本项目使用 **Guru Turbo 1.2 模型**开展研究，并公开 NanoGPT 训练策略、实验成绩与复现证据。
+### AutoTrust
 
-| 名称 | 在本项目中的角色 |
-|---|---|
-| **AutoTrust** | 项目背后的团队与品牌。 |
-| **ScienceGuru** | AutoTrust 的科研平台，也是本仓库成绩使用的名称。 |
-| **Guru Turbo 1.2** | 本研究项目使用的模型。 |
+[**AutoTrust**](https://autotrust.ai/about) 是一家位于新加坡的应用 AI 研究实验室，致力于开发服务科学研究的人工智能系统。研究方向涵盖科研智能体、长程任务、自我改进的编程智能体、开放式算法与 AI 科学家。团队将真实科研工作中的任务轨迹用于改进模型训练、推理与智能体编排，让模型能力的发展与实际研究问题相互促进。
 
-平台介绍来自 [AutoTrust 官网](https://autotrust.ai/)，模型版本与三者关系由项目负责人确认，记录于[项目署名](provenance/project-attribution.json)。基准测试实际训练的是 [`model/`](model/) 中归档的小型语言模型。
+### ScienceGuru
+
+[**ScienceGuru**](https://scienceguru.ai/) 是 AutoTrust 的科研工作空间，提供网页端与桌面端，将团队的模型能力融入文献阅读、科研推理和科学写作。它围绕连续的研究流程组织这些能力，帮助研究者从理解已有工作、分析研究问题，推进到整理和表达研究成果。本仓库将这一研究方向应用于语言模型训练效率优化，公开 NanoGPT 的具体训练策略、实验结果和复现材料。
+
+### Guru Turbo 1.2
+
+**Guru Turbo 1.2** 是本次 ScienceGuru 研究项目使用的模型。AutoTrust 的 [**Guru 模型系列**](https://autotrust.ai/models) 包括 Nano、Pro 与 Turbo，面向科研智能体与需要持续推进的研究任务，通过科研任务轨迹和合成科学数据改进能力。在本项目中，Guru Turbo 1.2 用于 NanoGPT 训练策略的研究与代码工作；基准计时对象是 [`model/`](model/) 中归档的小型语言模型的训练过程。
 
 ScienceGuru 的训练方案结合训练语料的因果前缀检索、稀疏 n-gram embedding、FP8 计算和紧凑训练日程，并通过 CPU 绑核、异步预取与协调内存管理减少 GPU 等待和时间波动。
 
 ## 已核验成绩
 
-由 **AutoTrust · ScienceGuru · Guru Turbo 1.2** 跑出的 652 步方案，采用固定五个 seed，完整验证集 **10,485,760 tokens**，全词表概率计算。五次完整运行的最终 loss 均低于 **3.28**。
-
-![ScienceGuru 五个 seed 的验证结果：训练用时为 24.868 至 24.939 秒，平均 24.8998 秒，五次验证 loss 均低于 3.28。](assets/seed-validation.svg)
-
-[下载验证图 PNG](assets/seed-validation.png) · [图表来源与生成方式](docs/SPEEDRUN_CHART.md)
-
-<details>
-<summary>公开验证数据：逐 seed 成绩与统计</summary>
-
-| Seed | 最终训练计时（秒） | 验证 loss |
-|---:|---:|---:|
-| 42 | 24.908 | 3.2733 |
-| 43 | 24.898 | 3.2777 |
-| 44 | 24.868 | 3.2752 |
-| 45 | 24.939 | 3.2732 |
-| 46 | 24.886 | 3.2755 |
-| **平均** | **24.8998** | **3.27498** |
-
-- 时间极差 **0.071 秒**，样本标准差 **0.026499 秒**。
-- 最差 loss **3.2777**；相对 3.28 门槛的单侧 t 检验 **p≈0.001868**，自由度 4。
-- 运行顺序固定为 **43→42→44→45→46**，统计包含全部五次运行。
-- 本次五 seed 达到目标：平均 ≤25 秒、极差 ≤5 秒、每次 loss≤3.28。
-
-</details>
+由 **AutoTrust · ScienceGuru · Guru Turbo 1.2** 跑出的 652 步方案，平均训练用时 **24.8998 秒**，平均验证 loss 为 **3.27498**。结果在完整的 **10,485,760-token** 验证集上使用全词表概率计算。
 
 成绩采用最终 validation 行的 `train_time`，计入训练、训练内容的读取、建库、查询与必要收尾。编译、预热和最终模型验证在该计时区间之外，详见[计时说明](docs/COMPLIANCE.md#timing-boundary)。
 
@@ -61,7 +40,7 @@ ScienceGuru 的训练方案结合训练语料的因果前缀检索、稀疏 n-gr
 
 ## 性能对比
 
-核查日期：**2026-09-24 UTC**。以下比较 **8×H100、FineWeb loss≤3.28** 的训练耗时；标有 **≈** 的耗时由榜单中四舍五入的分钟数换算。加速比为各方案耗时除以 ScienceGuru 的五个 seed 平均耗时。
+核查日期：**2026-09-24 UTC**。以下比较 **8×H100、FineWeb loss≤3.28** 的训练耗时；标有 **≈** 的耗时由榜单中四舍五入的分钟数换算。加速比为各方案耗时除以 ScienceGuru 的平均耗时。
 
 ![NanoGPT 训练耗时对比：ScienceGuru 24.8998 秒、ANVIL2 39.914 秒、Exact-match 47.2056 秒、官方 SOTA 约 67.56 秒、Recursive 约 75.36 秒、PACEvolve 140.2 秒、NorMuon 约 140.70 秒、Enigma 约 179.40 秒。](assets/benchmark-comparison.svg)
 
@@ -80,7 +59,7 @@ ScienceGuru 的训练方案结合训练语料的因果前缀检索、稀疏 n-gr
 
 相较官方 SOTA，ScienceGuru **耗时降低约 63.14%，加速约 2.713 倍，节省约 42.66 秒**。该纪录在[官方 Track 1 榜单](https://github.com/KellerJordan/modded-nanogpt#world-record-history)中的成绩为 1.126 分钟，对应 [PR #350](https://github.com/KellerJordan/modded-nanogpt/pull/350)。
 
-ANVIL2 为 18 次运行的均值，平均 loss 3.277311；Exact-match 为 5 次运行的均值，平均 loss 3.26556。同机 seed-42 复现详见[策略比较](docs/STRATEGY.md#comparisons)；机构关联、实验配置及 OpenAI/Anthropic 模型的优化器赛道结果详见 [baseline 文档](docs/BASELINES.md)。
+同机复现详见[策略比较](docs/STRATEGY.md#comparisons)；机构关联、实验配置及 OpenAI/Anthropic 模型的优化器赛道结果详见 [baseline 文档](docs/BASELINES.md)。
 
 ## 领先贡献者的背景
 
