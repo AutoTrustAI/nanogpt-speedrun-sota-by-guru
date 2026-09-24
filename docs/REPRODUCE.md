@@ -1,4 +1,4 @@
-# Reproducing ForgeMatch
+# Reproducing ScienceGuru
 
 The default strategy is **652 steps**, with `KX_SEED=42`. The frozen model files
 also support the previous **656-step** comparison. The five recorded 652-step
@@ -16,8 +16,8 @@ packaged portable wrapper covers CPU checks and dry-run execution.
 Clone the repository from the **AutoTrustAI** organization:
 
 ```sh
-git clone https://github.com/AutoTrustAI/forgematch-nanogpt.git
-cd forgematch-nanogpt
+git clone https://github.com/AutoTrustAI/nanogpt-speedrun-sota-by-guru.git
+cd nanogpt-speedrun-sota-by-guru
 ```
 
 Run the setup and launch commands below from this repository directory.
@@ -60,7 +60,7 @@ The Rust build uses `model/exact_match/Cargo.lock`. Build artifacts and download
 data do not change the 33 pinned source files. Avoid `python -O`: the trainer's
 assertions are part of its correctness checks. The archived header and upstream
 README describe earlier launch defaults; use this document and the wrapper for
-the actual ForgeMatch settings.
+the actual ScienceGuru settings.
 
 ## Pinned FA3 kernel and CUDA runtime
 
@@ -128,8 +128,8 @@ files. The dataset and runtime paths may be placeholders during dry-run:
 .venv/bin/python scripts/run_benchmark.py \
   --steps 652 --seed 42 \
   --data-dir model/data/fineweb10B \
-  --output-dir runs/forgematch652-s42-v1 \
-  --cache-dir cache/forgematch652-s42-v1 \
+  --output-dir runs/scienceguru652-s42-v1 \
+  --cache-dir cache/scienceguru652-s42-v1 \
   --kernel-dir runtime/flash-attn3-12864/build/torch-stable-abi29-cu128-x86_64-linux \
   --cuda-runtime-dir runtime/cuda13/nvidia/cu13/lib \
   --dry-run

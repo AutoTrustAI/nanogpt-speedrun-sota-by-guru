@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run one archived ForgeMatch strategy on eight H100 GPUs, preserving evidence.
+"""Run one archived ScienceGuru strategy on eight H100 GPUs, preserving evidence.
 
 The default is 652 steps. --dry-run needs only Python's standard library and
 never imports torch, queries GPUs, creates directories, or starts training.
@@ -81,7 +81,7 @@ def arguments(argv=None):
                         help="Pinned FA3 torch-stable-abi29-cu128-x86_64-linux build directory")
     parser.add_argument("--cuda-runtime-dir", type=Path, help="Directory containing libcudart.so.13")
     parser.add_argument("--cxx", default="g++-12")
-    parser.add_argument("--lock-file", type=Path, default=Path("/tmp/forgematch-gpu.lock"),
+    parser.add_argument("--lock-file", type=Path, default=Path("/tmp/scienceguru-gpu.lock"),
                         help="Use the same lock file for every cooperating experiment on this host")
     parser.add_argument("--timeout-seconds", type=float, default=1800)
     parser.add_argument("--dry-run", action="store_true")
@@ -227,7 +227,7 @@ def main(argv=None):
     source = args.output_dir / "source"
     command = [str(args.python), "-m", "torch.distributed.run", "--standalone", "--nproc_per_node=8", "train_gpt.py"]
     env, removed = environment(args)
-    result = {"strategy": "ForgeMatch", "status": "dry_run" if args.dry_run else "preflight",
+    result = {"strategy": "ScienceGuru", "status": "dry_run" if args.dry_run else "preflight",
               "created_utc": utc(), "steps": args.steps, "seed": args.seed,
               "source_commit": manifest["source_commit"], "source_sha256": source_hashes,
               "command": command, "cwd": str(source), "data_dir": str(args.data_dir),

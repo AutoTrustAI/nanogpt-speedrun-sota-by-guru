@@ -1,6 +1,6 @@
 # Credits and provenance
 
-**ScienceGuru + Guru Turbo 1.2 · ForgeMatch experiment results.** This file records source authorship and license provenance.
+**AutoTrust · ScienceGuru · Guru Turbo 1.2.** AutoTrust is the team and brand, ScienceGuru is its research platform, and Guru Turbo 1.2 is the model used for this project. These roles are recorded in [project attribution](provenance/project-attribution.json). This file records source authorship and license provenance.
 
 | Contribution | Author / project | Reference |
 |---|---|---|
@@ -11,7 +11,7 @@
 
 The Exact-match published 47.2056-second report identifies training source commit `65fb235a2e755b23ccd8edb26581511f57c88721`; its statistics and record are also present in the archived PR head above.
 
-Additional foundations include PyTorch, Triton, FlashAttention, the `kernels` ecosystem, Rust/PyO3, Hugging Face, FineWeb, and the many prior speedrun contributors. The inherited [model README](model/README.md) preserves the upstream contributor history, but its historical run instructions do not describe the ForgeMatch reproduction recipe.
+Additional foundations include PyTorch, Triton, FlashAttention, the `kernels` ecosystem, Rust/PyO3, Hugging Face, FineWeb, and the many prior speedrun contributors. The inherited [model README](model/README.md) preserves the upstream contributor history, but its historical run instructions do not describe the ScienceGuru reproduction recipe.
 
 The measured configuration uses causal retrieval, a shorter training schedule, CPU affinity, deferred CUDA waiting, coordinated index release, and pageable raw-shard allocation, with complete fixed-seed evidence.
 

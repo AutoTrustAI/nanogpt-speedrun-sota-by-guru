@@ -1,6 +1,6 @@
-# ForgeMatch strategy
+# ScienceGuru strategy
 
-ForgeMatch uses causal prefix retrieval, sparse n-gram embeddings, FP8 execution, and a compact training schedule to reach the NanoGPT speedrun's loss target. Retrieved continuation features provide predictive information at three points in the network. Asynchronous data movement and coordinated CPU/GPU execution reduce overhead and timing variation.
+ScienceGuru uses causal prefix retrieval, sparse n-gram embeddings, FP8 execution, and a compact training schedule to reach the NanoGPT speedrun's loss target. Retrieved continuation features provide predictive information at three points in the network. Asynchronous data movement and coordinated CPU/GPU execution reduce overhead and timing variation.
 
 ## Learning method
 
@@ -32,7 +32,7 @@ Each row summarizes a complete five-run cohort with fixed seeds 42–46.
 | CPU affinity + deferred wait | 656 | 25.2832 | 0.545 | 3.27312 | 3.2761 |
 | + coordinated release, complete v2 cohort | 656 | 25.0862 | 0.104 | 3.27374 | 3.2766 |
 | + pageable raw shards | 656 | 25.0054 | 0.108 | 3.27388 | 3.2769 |
-| **ForgeMatch, shorter schedule** | **652** | **24.8998** | **0.071** | **3.27498** | **3.2777** |
+| **ScienceGuru, shorter schedule** | **652** | **24.8998** | **0.071** | **3.27498** | **3.2777** |
 
 The final schedule saves **105.6 ms** on the five-run mean versus 656 steps, while mean loss rises by **0.00110**. The cohorts used fresh compilation caches on successive local SSDs. The final cohort ran in the order **43→42→44→45→46**, with a pause after seed43; its statistics include all five completed runs.
 
@@ -42,7 +42,7 @@ An earlier coordinated-release cohort stopped when a compilation-cache filesyste
 
 ## Comparisons
 
-The latest accepted [official Track 1 result](https://github.com/KellerJordan/modded-nanogpt#world-record-history), checked **2026-09-23**, is **Canonical Token Masking by @jvarho** ([merged PR #350](https://github.com/KellerJordan/modded-nanogpt/pull/350)): **1.126 min (≈67.56 s)**. ForgeMatch's **24.8998 s** five-seed mean reduces the published training time by **≈63.14%**, a **≈2.713× speedup**, at the shared 8×H100 / loss ≤3.28 target. Reference seconds and ratios use the leaderboard's rounded-minute value.
+The latest accepted [official Track 1 result](https://github.com/KellerJordan/modded-nanogpt#world-record-history), checked **2026-09-24 UTC**, is **Canonical Token Masking by @jvarho** ([merged PR #350](https://github.com/KellerJordan/modded-nanogpt/pull/350)): **1.126 min (≈67.56 s)**. ScienceGuru's **24.8998 s** five-seed mean reduces the published training time by **≈63.14%**, a **≈2.713× speedup**, at the shared 8×H100 / loss ≤3.28 target. Reference seconds and ratios use the leaderboard's rounded-minute value.
 
 Public reference values are from the archived upstream reports:
 
@@ -55,7 +55,7 @@ The comparison uses the common **loss ≤3.28** target. ANVIL2 reports 18 unseed
 
 The original-source reproductions on our 8×H100 machine each used **one seed42 run**:
 
-| Original strategy | Steps | Time | Loss | Reduction to ForgeMatch's five-run mean |
+| Original strategy | Steps | Time | Loss | Reduction to ScienceGuru's five-run mean |
 |---|---:|---:|---:|---:|
 | ANVIL2 | 1194 | 40.221 s | 3.2750 | 38.09% |
 | Exact-match | 688 | 48.247 s | 3.2618 | 48.39% |

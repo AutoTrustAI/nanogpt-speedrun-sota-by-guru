@@ -30,8 +30,9 @@ assert sum(local_times) / len(local_times) == Decimal(STATS["mean_seconds"])
 assert max(local_times) - min(local_times) == Decimal(STATS["range_seconds"])
 
 rows = [{
-    "method": "ForgeMatch",
-    "affiliation": "ScienceGuru + Guru Turbo 1.2",
+    "method": "ScienceGuru",
+    "display_method": "ScienceGuru",
+    "affiliation": "AutoTrust · Guru Turbo 1.2",
     "seconds": STATS["mean_seconds"],
     "approximate": False,
     "local": True,
@@ -41,18 +42,19 @@ for row in rows:
     if "source_minutes" in row:
         assert Decimal(row["seconds"]) == Decimal(row["source_minutes"]) * 60
 
-INK = "#14243B"
-MUTED = "#66768B"
-ACCENT = "#008A80"
-GRID = "#E4EAF1"
+INK = "#1C2A25"
+MUTED = "#66776D"
+ACCENT = "#1F4B41"
+GRID = "#DDE4D9"
+BACKGROUND = "#FAF6EC"
 plt.rcParams.update({
     "font.family": "DejaVu Sans",
     "font.size": 13,
     "svg.fonttype": "none",
-    "svg.hashsalt": "forgematch-comparison-v1",
+    "svg.hashsalt": "scienceguru-comparison-v1",
     "axes.unicode_minus": False,
 })
-fig = plt.figure(figsize=(16, 10), facecolor="white")
+fig = plt.figure(figsize=(16, 10), facecolor=BACKGROUND)
 ax = fig.add_axes((0.305, 0.19, 0.65, 0.60), facecolor="none")
 ax.set_xlim(0, 216)
 ax.set_ylim(len(rows) - 0.35, -0.65)
@@ -63,11 +65,11 @@ ax.set_axisbelow(True)
 ax.grid(axis="x", color=GRID, linewidth=0.9)
 for spine in ax.spines.values():
     spine.set_visible(False)
-ax.axvline(0, color="#CBD5E1", linewidth=1)
+ax.axvline(0, color="#C2CFC3", linewidth=1)
 ax.set_xlabel("Reported training time (seconds)", color=MUTED, labelpad=20, fontsize=13)
 
-fig.text(0.035, 0.952, "SCIENCEGURU + GURU TURBO 1.2", color=ACCENT,
-         fontsize=14, weight="bold")
+fig.text(0.035, 0.952, "AutoTrust · ScienceGuru · Guru Turbo 1.2", color=ACCENT,
+         fontsize=16, weight="bold")
 fig.text(0.035, 0.895, "NanoGPT training-time comparison", color=INK,
          fontsize=29, weight="bold")
 fig.text(0.035, 0.851,
@@ -81,12 +83,12 @@ for i, row in enumerate(rows):
         fig.add_artist(FancyBboxPatch(
             (0.022, center_y - 0.034), 0.955, 0.068,
             boxstyle="round,pad=0.009,rounding_size=0.012",
-            linewidth=0, facecolor="#E9F7F4", transform=fig.transFigure, zorder=-1,
+            linewidth=0, facecolor="#E4EEE7", transform=fig.transFigure, zorder=-1,
         ))
-    color = ACCENT if local else "#B5C6DC"
+    color = ACCENT if local else "#B3C3B8"
     ax.barh(i, float(row["seconds"]), height=0.42, color=color,
             edgecolor="none", zorder=3)
-    fig.text(0.035, center_y + 0.006, row["method"],
+    fig.text(0.035, center_y + 0.006, row.get("display_method", row["method"]),
              color=ACCENT if local else INK, fontsize=17, weight="bold", va="center")
     fig.text(0.035, center_y - 0.019, row["affiliation"],
              color=ACCENT if local else MUTED, fontsize=11.5, va="center")
@@ -96,7 +98,7 @@ for i, row in enumerate(rows):
             weight="bold" if local else "normal", zorder=4)
 
 fig.text(0.035, 0.070,
-         f"ForgeMatch  ·  {STATS['n']} seeds  ·  {COHORT['steps']} steps  ·  "
+         f"ScienceGuru measured result  ·  {STATS['n']} seeds  ·  {COHORT['steps']} steps  ·  "
          f"{STATS['range_seconds']} s run-to-run range",
          fontsize=13, color=INK, weight="normal")
 fig.text(0.035, 0.033,
@@ -105,8 +107,8 @@ fig.text(0.035, 0.033,
 
 ASSETS.mkdir(exist_ok=True)
 svg_path = ASSETS / "benchmark-comparison.svg"
-fig.savefig(svg_path, facecolor="white", metadata={"Date": None})
-fig.savefig(ASSETS / "benchmark-comparison.png", dpi=150, facecolor="white")
+fig.savefig(svg_path, facecolor=BACKGROUND, metadata={"Date": None})
+fig.savefig(ASSETS / "benchmark-comparison.png", dpi=150, facecolor=BACKGROUND)
 plt.close(fig)
 
 # Preserve selectable English text and provide accessible SVG descriptions.
@@ -116,10 +118,12 @@ svg = tree.getroot()
 svg.set("role", "img")
 svg.set("aria-labelledby", "chart-title chart-description")
 title = ET.Element("{http://www.w3.org/2000/svg}title", {"id": "chart-title"})
-title.text = "NanoGPT training-time comparison"
+title.text = "AutoTrust · ScienceGuru · Guru Turbo 1.2: NanoGPT training-time comparison"
 description = ET.Element("{http://www.w3.org/2000/svg}desc", {"id": "chart-description"})
 description.text = "; ".join(
-    row["method"] + ": " + ("approximately " if row["approximate"] else "")
+    row.get("display_method", row["method"])
+    + (" (AutoTrust · Guru Turbo 1.2; measured NanoGPT training result)" if row.get("local", False) else "")
+    + ": " + ("approximately " if row["approximate"] else "")
     + row["seconds"] + " seconds" for row in rows
 ) + ". Sources and experimental context are documented in docs/BASELINES.md."
 svg.insert(0, description)

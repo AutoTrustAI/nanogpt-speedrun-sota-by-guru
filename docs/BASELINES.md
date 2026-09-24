@@ -1,12 +1,12 @@
 # Research baselines and benchmark context
 
-Training results, research affiliations, and source references. Updated **2026-09-23**.
+Training results, research affiliations, and source references. Updated **2026-09-24 UTC**.
 
 ## Official SOTA comparison
 
-The latest accepted Track 1 entry is **Canonical Token Masking by @jvarho**, record **#91**, at **1.126 min (≈67.56 s)** in the [official record history](https://github.com/KellerJordan/modded-nanogpt#world-record-history). [PR #350](https://github.com/KellerJordan/modded-nanogpt/pull/350) was merged on **2026-09-18**; the record table dates the contribution **2026-08-06**. This is the **Community reference** row in the opening chart.
+The latest accepted Track 1 entry is **Canonical Token Masking by @jvarho**, record **#91**, at **1.126 min (≈67.56 s)** in the [official record history](https://github.com/KellerJordan/modded-nanogpt#world-record-history). [PR #350](https://github.com/KellerJordan/modded-nanogpt/pull/350) was merged on **2026-09-18**; the record table dates the contribution **2026-08-06**. This is the final official-history point in the [opening chart](SPEEDRUN_CHART.md).
 
-Against that published time, ForgeMatch's **24.8998 s** five-seed mean uses **≈63.14% less time**, a **≈2.713× speedup**, saving **≈42.66 s**. Both target FineWeb validation loss ≤3.28 on 8×H100. The ratios use the leaderboard's rounded-minute value for the reference and the measured cohort mean for ForgeMatch.
+Against that published time, ScienceGuru's **24.8998 s** five-seed mean uses **≈63.14% less time**, a **≈2.713× speedup**, saving **≈42.66 s**. Both target FineWeb validation loss ≤3.28 on 8×H100. The ratios use the leaderboard's rounded-minute value for the reference and the measured cohort mean for ScienceGuru.
 
 ## Training-time baselines
 
@@ -21,9 +21,11 @@ These results concern the **8×H100 / FineWeb validation loss ≤3.28** task. Ti
 | Hyperstition, formerly Social Physics Lab | ANVIL2 | **39.914 s** | [PR360](https://github.com/KellerJordan/modded-nanogpt/pull/360) |
 | hermabr | Exact-match | **47.2056 s** | [PR367](https://github.com/KellerJordan/modded-nanogpt/pull/367) |
 | modded-nanogpt community / @jvarho | Canonical Token Masking | **≈67.56 s** | [Record #91](https://github.com/KellerJordan/modded-nanogpt#world-record-history) / [PR350](https://github.com/KellerJordan/modded-nanogpt/pull/350) |
-| **ScienceGuru + Guru Turbo 1.2** | **ForgeMatch** | **24.8998 s** | [Five-seed results](../results/cohorts.json), 652 steps |
+| **AutoTrust · Guru Turbo 1.2** | **ScienceGuru** | **24.8998 s** | [Five-seed results](../results/cohorts.json), 652 steps |
 
-The [record history](https://github.com/KellerJordan/modded-nanogpt#world-record-history) supplies record identifiers and rounded times. ForgeMatch's run records, source hashes, and measurement protocol are in [Evidence](EVIDENCE.md).
+The [record history](https://github.com/KellerJordan/modded-nanogpt#world-record-history) supplies record identifiers and rounded times. ScienceGuru's run records, source hashes, and measurement protocol are in [Evidence](EVIDENCE.md).
+
+Contributor biographies and primary sources for the leading results are collected in [Teams and contributors](TEAMS.md).
 
 ### Affiliations and experiment details
 
@@ -62,10 +64,24 @@ NanoGPT Speedrun evaluates training efficiency and provides an open testbed for 
 | Host/data systems | Loading, prefetch, CPU placement, allocations and host-to-device transfers |
 | Experimental reasoning | Profiling, hypotheses, ablations, multiple runs, statistical checks and reproducibility |
 
-The main track measures training time to a fixed FineWeb language-modeling loss. It permits changes to architecture and training methods, including sparse lookup tables, numerical precision, and hardware-specific kernels. The optimizer track fixes the model and batch configuration and measures training steps. ForgeMatch's training configuration and execution environment are documented in [Strategy](STRATEGY.md) and [Reproduce](REPRODUCE.md).
+The main track measures training time to a fixed FineWeb language-modeling loss. It permits changes to architecture and training methods, including sparse lookup tables, numerical precision, and hardware-specific kernels. The optimizer track fixes the model and batch configuration and measures training steps. ScienceGuru's training configuration and execution environment are documented in [Strategy](STRATEGY.md) and [Reproduce](REPRODUCE.md).
 
-## Regenerating the comparison chart
+## Regenerating the charts
 
-The README chart reads ForgeMatch's measured mean directly from [cohorts.json](../results/cohorts.json). Public values and source links are in [comparison-data.json](../assets/comparison-data.json). Bars use a linear axis starting at zero; approximate values retain their precision markers. The figure displays selected training times, with the source context documented above.
+The README opens with the full [speedrun history chart](../assets/speedrun-history.svg): all **91 numbered official records**, including the two additional re-timings of record #21, followed by two selected public results and ScienceGuru's final five-seed mean. A [recent-history version](../assets/speedrun-history-recent.svg) focuses on October 2025 onward. Both use a logarithmic training-time axis and plot ScienceGuru after the public results. Historical rows and source links are in [speedrun-history-data.json](../assets/speedrun-history-data.json); ScienceGuru's measured mean is read directly from [cohorts.json](../results/cohorts.json). See [chart data notes](SPEEDRUN_CHART.md) for dates, source precision, and interpretation.
 
-With Python and Matplotlib installed, run `python3 scripts/plot_comparison.py` from the repository root to recreate the [SVG](../assets/benchmark-comparison.svg) and [PNG](../assets/benchmark-comparison.png). The renderer was verified with Matplotlib 3.11.1.
+With Python and Matplotlib installed, run from the repository root:
+
+```sh
+python3 scripts/plot_speedrun_history.py
+```
+
+This recreates the full and recent-history SVG and PNG files in `assets/`.
+
+The additional [horizontal comparison chart](../assets/benchmark-comparison.svg) shows selected training-time baselines on a linear axis starting at zero. It reads the same ScienceGuru cohort mean, with public values and sources from [comparison-data.json](../assets/comparison-data.json). Approximate public values retain their precision markers. Recreate its [SVG](../assets/benchmark-comparison.svg) and [PNG](../assets/benchmark-comparison.png) with:
+
+```sh
+python3 scripts/plot_comparison.py
+```
+
+The renderers use Matplotlib; the original comparison renderer was verified with Matplotlib 3.11.1.

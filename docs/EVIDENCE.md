@@ -1,6 +1,6 @@
 # Results and evidence
 
-**ScienceGuru + Guru Turbo 1.2 · ForgeMatch experiment results.** See [project attribution](../provenance/project-attribution.json), source records, and benchmark evidence below.
+**AutoTrust · ScienceGuru · Guru Turbo 1.2 experiment results.** See [project attribution](../provenance/project-attribution.json), source records, and benchmark evidence below.
 
 The completed 652-step cohort averaged **24.8998 seconds**, with a **0.071-second** fastest-to-slowest spread. All five fixed seeds reached validation loss ≤3.28; the mean loss was **3.27498**, and the worst was **3.2777**. This satisfies the target of a mean ≤25 seconds and a spread ≤5 seconds.
 

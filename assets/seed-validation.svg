@@ -1,0 +1,345 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns2="http://creativecommons.org/ns#" xmlns:ns4="http://www.w3.org/1999/xlink" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" width="1440pt" height="576pt" viewBox="0 0 1440 576" version="1.1" role="img" aria-labelledby="chart-title chart-description">
+ <title id="chart-title">AutoTrust · ScienceGuru · Guru Turbo 1.2: Five seeds. Five passes.</title><desc id="chart-description">Measured NanoGPT training on 8 H100 GPUs, FineWeb, 652 steps. Seed 42: training time 24.908 seconds, final validation loss 3.2733; Seed 43: training time 24.898 seconds, final validation loss 3.2777; Seed 44: training time 24.868 seconds, final validation loss 3.2752; Seed 45: training time 24.939 seconds, final validation loss 3.2732; Seed 46: training time 24.886 seconds, final validation loss 3.2755. Mean training time 24.8998 seconds, range 0.071 seconds. Mean final validation loss 3.27498. All five runs have loss at most 3.28 and training time below 25 seconds. Measured 2026-09-22. Source: results/cohorts.json. Compilation, warmup and validation are outside the measured training interval.</desc><metadata>
+  <rdf:RDF>
+   <ns2:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <ns2:Agent>
+      <dc:title>Matplotlib v3.11.1, https://matplotlib.org/</dc:title>
+     </ns2:Agent>
+    </dc:creator>
+   </ns2:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 576  L 1440 576  L 1440 0  L 0 0  z " style="fill: #faf6ec" />
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 120.96 411.84  L 668.16 411.84  L 668.16 183.744  L 120.96 183.744  z " style="fill: #fffdf7" />
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <path d="M 120.96 411.84  L 120.96 183.744  " clip-path="url(#pb3731af2df)" style="fill: none; stroke: #dde4d9; stroke-width: 0.9; stroke-linecap: square" />
+     </g>
+     <g id="line2d_2" />
+     <g id="text_1">
+      <text style="font-size: 13px; font-family: 'Arial'; text-anchor: middle; fill: #66776d" x="120.96" y="433.304355" transform="rotate(-0 120.96 433.304355)">0</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_3">
+      <path d="M 222.293333 411.84  L 222.293333 183.744  " clip-path="url(#pb3731af2df)" style="fill: none; stroke: #dde4d9; stroke-width: 0.9; stroke-linecap: square" />
+     </g>
+     <g id="line2d_4" />
+     <g id="text_2">
+      <text style="font-size: 13px; font-family: 'Arial'; text-anchor: middle; fill: #66776d" x="222.293333" y="433.304355" transform="rotate(-0 222.293333 433.304355)">5</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_5">
+      <path d="M 323.626667 411.84  L 323.626667 183.744  " clip-path="url(#pb3731af2df)" style="fill: none; stroke: #dde4d9; stroke-width: 0.9; stroke-linecap: square" />
+     </g>
+     <g id="line2d_6" />
+     <g id="text_3">
+      <text style="font-size: 13px; font-family: 'Arial'; text-anchor: middle; fill: #66776d" x="323.626667" y="433.304355" transform="rotate(-0 323.626667 433.304355)">10</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_7">
+      <path d="M 424.96 411.84  L 424.96 183.744  " clip-path="url(#pb3731af2df)" style="fill: none; stroke: #dde4d9; stroke-width: 0.9; stroke-linecap: square" />
+     </g>
+     <g id="line2d_8" />
+     <g id="text_4">
+      <text style="font-size: 13px; font-family: 'Arial'; text-anchor: middle; fill: #66776d" x="424.96" y="433.304355" transform="rotate(-0 424.96 433.304355)">15</text>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_9">
+      <path d="M 526.293333 411.84  L 526.293333 183.744  " clip-path="url(#pb3731af2df)" style="fill: none; stroke: #dde4d9; stroke-width: 0.9; stroke-linecap: square" />
+     </g>
+     <g id="line2d_10" />
+     <g id="text_5">
+      <text style="font-size: 13px; font-family: 'Arial'; text-anchor: middle; fill: #66776d" x="526.293333" y="433.304355" transform="rotate(-0 526.293333 433.304355)">20</text>
+     </g>
+    </g>
+    <g id="xtick_6">
+     <g id="line2d_11">
+      <path d="M 627.626667 411.84  L 627.626667 183.744  " clip-path="url(#pb3731af2df)" style="fill: none; stroke: #dde4d9; stroke-width: 0.9; stroke-linecap: square" />
+     </g>
+     <g id="line2d_12" />
+     <g id="text_6">
+      <text style="font-size: 13px; font-family: 'Arial'; text-anchor: middle; fill: #66776d" x="627.626667" y="433.304355" transform="rotate(-0 627.626667 433.304355)">25</text>
+     </g>
+    </g>
+    <g id="text_7">
+     <text style="font-size: 14px; font-family: 'Arial'; text-anchor: middle; fill: #66776d" x="394.56" y="461.232578" transform="rotate(-0 394.56 461.232578)">Training time (seconds)</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_13" />
+     <g id="text_8">
+      <text style="font-size: 14px; font-family: 'Arial'; text-anchor: end; fill: #1c2a25" x="106.96" y="213.43878" transform="rotate(-0 106.96 213.43878)">Seed 42</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_14" />
+     <g id="text_9">
+      <text style="font-size: 14px; font-family: 'Arial'; text-anchor: end; fill: #1c2a25" x="106.96" y="258.163486" transform="rotate(-0 106.96 258.163486)">Seed 43</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_15" />
+     <g id="text_10">
+      <text style="font-size: 14px; font-family: 'Arial'; text-anchor: end; fill: #1c2a25" x="106.96" y="302.888191" transform="rotate(-0 106.96 302.888191)">Seed 44</text>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_16" />
+     <g id="text_11">
+      <text style="font-size: 14px; font-family: 'Arial'; text-anchor: end; fill: #1c2a25" x="106.96" y="347.612897" transform="rotate(-0 106.96 347.612897)">Seed 45</text>
+     </g>
+    </g>
+    <g id="ytick_5">
+     <g id="line2d_17" />
+     <g id="text_12">
+      <text style="font-size: 14px; font-family: 'Arial'; text-anchor: end; fill: #1c2a25" x="106.96" y="392.337603" transform="rotate(-0 106.96 392.337603)">Seed 46</text>
+     </g>
+    </g>
+   </g>
+   <g id="patch_3">
+    <path d="M 120.96 196.490541  L 625.762133 196.490541  L 625.762133 220.194635  L 120.96 220.194635  z " clip-path="url(#pb3731af2df)" style="fill: #1f4b41" />
+   </g>
+   <g id="patch_4">
+    <path d="M 120.96 241.215247  L 625.559467 241.215247  L 625.559467 264.919341  L 120.96 264.919341  z " clip-path="url(#pb3731af2df)" style="fill: #1f4b41" />
+   </g>
+   <g id="patch_5">
+    <path d="M 120.96 285.939953  L 624.951467 285.939953  L 624.951467 309.644047  L 120.96 309.644047  z " clip-path="url(#pb3731af2df)" style="fill: #1f4b41" />
+   </g>
+   <g id="patch_6">
+    <path d="M 120.96 330.664659  L 626.3904 330.664659  L 626.3904 354.368753  L 120.96 354.368753  z " clip-path="url(#pb3731af2df)" style="fill: #1f4b41" />
+   </g>
+   <g id="patch_7">
+    <path d="M 120.96 375.389365  L 625.316267 375.389365  L 625.316267 399.093459  L 120.96 399.093459  z " clip-path="url(#pb3731af2df)" style="fill: #1f4b41" />
+   </g>
+   <g id="text_13">
+    <text style="font-size: 12px; font-family: 'Arial'; text-anchor: end; fill: #2c5e52" x="627.626667" y="170.954055" transform="rotate(-0 627.626667 170.954055)">25 s guide</text>
+   </g>
+   <g id="line2d_18">
+    <path d="M 627.626667 411.84  L 627.626667 183.744  " clip-path="url(#pb3731af2df)" style="fill: none; stroke-dasharray: 5.6,4.2; stroke-dashoffset: 0; stroke: #2c5e52; stroke-width: 1.4" />
+   </g>
+   <g id="text_14">
+    <text style="font-weight: 700; font-size: 15px; font-family: 'Arial'; text-anchor: end; fill: #fffdf7" x="615.6288" y="212.224424" transform="rotate(-0 615.6288 212.224424)">24.908 s</text>
+   </g>
+   <g id="text_15">
+    <text style="font-weight: 700; font-size: 15px; font-family: 'Arial'; text-anchor: end; fill: #fffdf7" x="615.426133" y="256.94913" transform="rotate(-0 615.426133 256.94913)">24.898 s</text>
+   </g>
+   <g id="text_16">
+    <text style="font-weight: 700; font-size: 15px; font-family: 'Arial'; text-anchor: end; fill: #fffdf7" x="614.818133" y="301.673836" transform="rotate(-0 614.818133 301.673836)">24.868 s</text>
+   </g>
+   <g id="text_17">
+    <text style="font-weight: 700; font-size: 15px; font-family: 'Arial'; text-anchor: end; fill: #fffdf7" x="616.257067" y="346.398542" transform="rotate(-0 616.257067 346.398542)">24.939 s</text>
+   </g>
+   <g id="text_18">
+    <text style="font-weight: 700; font-size: 15px; font-family: 'Arial'; text-anchor: end; fill: #fffdf7" x="615.182933" y="391.123248" transform="rotate(-0 615.182933 391.123248)">24.886 s</text>
+   </g>
+  </g>
+  <g id="axes_2">
+   <g id="patch_8">
+    <path d="M 840.96 411.84  L 1380.96 411.84  L 1380.96 183.744  L 840.96 183.744  z " style="fill: #fffdf7" />
+   </g>
+   <g id="matplotlib.axis_3">
+    <g id="xtick_7">
+     <g id="line2d_19">
+      <path d="M 840.96 411.84  L 840.96 183.744  " clip-path="url(#p8ed8a27ebf)" style="fill: none; stroke: #dde4d9; stroke-width: 0.9; stroke-linecap: square" />
+     </g>
+     <g id="line2d_20" />
+     <g id="text_19">
+      <text style="font-size: 13px; font-family: 'Arial'; text-anchor: middle; fill: #66776d" x="840.96" y="433.304355" transform="rotate(-0 840.96 433.304355)">3.270</text>
+     </g>
+    </g>
+    <g id="xtick_8">
+     <g id="line2d_21">
+      <path d="M 1020.96 411.84  L 1020.96 183.744  " clip-path="url(#p8ed8a27ebf)" style="fill: none; stroke: #dde4d9; stroke-width: 0.9; stroke-linecap: square" />
+     </g>
+     <g id="line2d_22" />
+     <g id="text_20">
+      <text style="font-size: 13px; font-family: 'Arial'; text-anchor: middle; fill: #66776d" x="1020.96" y="433.304355" transform="rotate(-0 1020.96 433.304355)">3.274</text>
+     </g>
+    </g>
+    <g id="xtick_9">
+     <g id="line2d_23">
+      <path d="M 1200.96 411.84  L 1200.96 183.744  " clip-path="url(#p8ed8a27ebf)" style="fill: none; stroke: #dde4d9; stroke-width: 0.9; stroke-linecap: square" />
+     </g>
+     <g id="line2d_24" />
+     <g id="text_21">
+      <text style="font-size: 13px; font-family: 'Arial'; text-anchor: middle; fill: #66776d" x="1200.96" y="433.304355" transform="rotate(-0 1200.96 433.304355)">3.278</text>
+     </g>
+    </g>
+    <g id="xtick_10">
+     <g id="line2d_25">
+      <path d="M 1380.96 411.84  L 1380.96 183.744  " clip-path="url(#p8ed8a27ebf)" style="fill: none; stroke: #dde4d9; stroke-width: 0.9; stroke-linecap: square" />
+     </g>
+     <g id="line2d_26" />
+     <g id="text_22">
+      <text style="font-size: 13px; font-family: 'Arial'; text-anchor: middle; fill: #66776d" x="1380.96" y="433.304355" transform="rotate(-0 1380.96 433.304355)">3.282</text>
+     </g>
+    </g>
+    <g id="text_23">
+     <text style="font-size: 14px; font-family: 'Arial'; text-anchor: middle; fill: #66776d" x="1110.96" y="461.232578" transform="rotate(-0 1110.96 461.232578)">Final validation loss</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_4">
+    <g id="ytick_6">
+     <g id="line2d_27" />
+     <g id="text_24">
+      <text style="font-size: 14px; font-family: 'Arial'; text-anchor: end; fill: #1c2a25" x="826.96" y="213.43878" transform="rotate(-0 826.96 213.43878)">Seed 42</text>
+     </g>
+    </g>
+    <g id="ytick_7">
+     <g id="line2d_28" />
+     <g id="text_25">
+      <text style="font-size: 14px; font-family: 'Arial'; text-anchor: end; fill: #1c2a25" x="826.96" y="258.163486" transform="rotate(-0 826.96 258.163486)">Seed 43</text>
+     </g>
+    </g>
+    <g id="ytick_8">
+     <g id="line2d_29" />
+     <g id="text_26">
+      <text style="font-size: 14px; font-family: 'Arial'; text-anchor: end; fill: #1c2a25" x="826.96" y="302.888191" transform="rotate(-0 826.96 302.888191)">Seed 44</text>
+     </g>
+    </g>
+    <g id="ytick_9">
+     <g id="line2d_30" />
+     <g id="text_27">
+      <text style="font-size: 14px; font-family: 'Arial'; text-anchor: end; fill: #1c2a25" x="826.96" y="347.612897" transform="rotate(-0 826.96 347.612897)">Seed 45</text>
+     </g>
+    </g>
+    <g id="ytick_10">
+     <g id="line2d_31" />
+     <g id="text_28">
+      <text style="font-size: 14px; font-family: 'Arial'; text-anchor: end; fill: #1c2a25" x="826.96" y="392.337603" transform="rotate(-0 826.96 392.337603)">Seed 46</text>
+     </g>
+    </g>
+   </g>
+   <g id="LineCollection_1">
+    <path d="M 840.96 208.342588  L 989.46 208.342588  " clip-path="url(#p8ed8a27ebf)" style="fill: none; stroke: #dde4d9; stroke-width: 1.8" />
+   </g>
+   <g id="LineCollection_2">
+    <path d="M 840.96 253.067294  L 1187.46 253.067294  " clip-path="url(#p8ed8a27ebf)" style="fill: none; stroke: #dde4d9; stroke-width: 1.8" />
+   </g>
+   <g id="LineCollection_3">
+    <path d="M 840.96 297.792  L 1074.96 297.792  " clip-path="url(#p8ed8a27ebf)" style="fill: none; stroke: #dde4d9; stroke-width: 1.8" />
+   </g>
+   <g id="LineCollection_4">
+    <path d="M 840.96 342.516706  L 984.96 342.516706  " clip-path="url(#p8ed8a27ebf)" style="fill: none; stroke: #dde4d9; stroke-width: 1.8" />
+   </g>
+   <g id="LineCollection_5">
+    <path d="M 840.96 387.241412  L 1088.46 387.241412  " clip-path="url(#p8ed8a27ebf)" style="fill: none; stroke: #dde4d9; stroke-width: 1.8" />
+   </g>
+   <g id="line2d_32">
+    <path d="M 1290.96 411.84  L 1290.96 183.744  " clip-path="url(#p8ed8a27ebf)" style="fill: none; stroke-dasharray: 5.6,4.2; stroke-dashoffset: 0; stroke: #2c5e52; stroke-width: 1.4" />
+   </g>
+   <g id="text_29">
+    <text style="font-size: 12px; font-family: 'Arial'; text-anchor: middle; fill: #2c5e52" x="1290.96" y="170.954289" transform="rotate(-0 1290.96 170.954289)">3.28 pass threshold</text>
+   </g>
+   <g id="PathCollection_1">
+    <defs>
+     <path id="mda468236a3" d="M 0 5.291503  C 1.403323 5.291503 2.749358 4.733957 3.741657 3.741657  C 4.733957 2.749358 5.291503 1.403323 5.291503 0  C 5.291503 -1.403323 4.733957 -2.749358 3.741657 -3.741657  C 2.749358 -4.733957 1.403323 -5.291503 0 -5.291503  C -1.403323 -5.291503 -2.749358 -4.733957 -3.741657 -3.741657  C -4.733957 -2.749358 -5.291503 -1.403323 -5.291503 0  C -5.291503 1.403323 -4.733957 2.749358 -3.741657 3.741657  C -2.749358 4.733957 -1.403323 5.291503 0 5.291503  z " style="stroke: #fffdf7; stroke-width: 1.5" />
+    </defs>
+    <g clip-path="url(#p8ed8a27ebf)">
+     <use ns4:href="#mda468236a3" x="989.46" y="208.342588" style="fill: #1f4b41; stroke: #fffdf7; stroke-width: 1.5" />
+    </g>
+   </g>
+   <g id="PathCollection_2">
+    <g clip-path="url(#p8ed8a27ebf)">
+     <use ns4:href="#mda468236a3" x="1187.46" y="253.067294" style="fill: #1f4b41; stroke: #fffdf7; stroke-width: 1.5" />
+    </g>
+   </g>
+   <g id="PathCollection_3">
+    <g clip-path="url(#p8ed8a27ebf)">
+     <use ns4:href="#mda468236a3" x="1074.96" y="297.792" style="fill: #1f4b41; stroke: #fffdf7; stroke-width: 1.5" />
+    </g>
+   </g>
+   <g id="PathCollection_4">
+    <g clip-path="url(#p8ed8a27ebf)">
+     <use ns4:href="#mda468236a3" x="984.96" y="342.516706" style="fill: #1f4b41; stroke: #fffdf7; stroke-width: 1.5" />
+    </g>
+   </g>
+   <g id="PathCollection_5">
+    <g clip-path="url(#p8ed8a27ebf)">
+     <use ns4:href="#mda468236a3" x="1088.46" y="387.241412" style="fill: #1f4b41; stroke: #fffdf7; stroke-width: 1.5" />
+    </g>
+   </g>
+   <g id="text_30">
+    <text style="font-weight: 700; font-size: 15px; font-family: 'Arial'; text-anchor: start; fill: #1f4b41" x="1005.21" y="212.224424" transform="rotate(-0 1005.21 212.224424)">3.2733</text>
+   </g>
+   <g id="text_31">
+    <text style="font-weight: 700; font-size: 15px; font-family: 'Arial'; text-anchor: start; fill: #1f4b41" x="1203.21" y="256.94913" transform="rotate(-0 1203.21 256.94913)">3.2777</text>
+   </g>
+   <g id="text_32">
+    <text style="font-weight: 700; font-size: 15px; font-family: 'Arial'; text-anchor: start; fill: #1f4b41" x="1090.71" y="301.673836" transform="rotate(-0 1090.71 301.673836)">3.2752</text>
+   </g>
+   <g id="text_33">
+    <text style="font-weight: 700; font-size: 15px; font-family: 'Arial'; text-anchor: start; fill: #1f4b41" x="1000.71" y="346.398542" transform="rotate(-0 1000.71 346.398542)">3.2732</text>
+   </g>
+   <g id="text_34">
+    <text style="font-weight: 700; font-size: 15px; font-family: 'Arial'; text-anchor: start; fill: #1f4b41" x="1104.21" y="391.123248" transform="rotate(-0 1104.21 391.123248)">3.2755</text>
+   </g>
+  </g>
+  <g id="line2d_33">
+   <path d="M 64.8 478.656  L 1380.96 478.656  " style="fill: none; stroke: #dde4d9; stroke-linecap: square" />
+  </g>
+  <g id="text_35">
+   <text style="font-weight: 700; font-size: 16px; font-family: 'Arial'; text-anchor: start; fill: #1f4b41" x="64.8" y="31.68" transform="rotate(-0 64.8 31.68)">AutoTrust · ScienceGuru · Guru Turbo 1.2</text>
+  </g>
+  <g id="text_36">
+   <text style="font-weight: 700; font-size: 37px; font-family: 'Arial'; text-anchor: start; fill: #1c2a25" x="64.8" y="78.912" transform="rotate(-0 64.8 78.912)">Five seeds. Five passes.</text>
+  </g>
+  <g id="text_37">
+   <text style="font-size: 16px; font-family: 'Arial'; text-anchor: start; fill: #66776d" x="64.8" y="111.168" transform="rotate(-0 64.8 111.168)">NanoGPT training  ·  8× H100  ·  FineWeb  ·  652 steps  ·  Seeds 42–46</text>
+  </g>
+  <g id="text_38">
+   <text style="font-weight: 700; font-size: 20px; font-family: 'Arial'; text-anchor: start; fill: #1c2a25" x="120.96" y="152.64" transform="rotate(-0 120.96 152.64)">Training time</text>
+  </g>
+  <g id="text_39">
+   <text style="font-weight: 700; font-size: 20px; font-family: 'Arial'; text-anchor: start; fill: #1c2a25" x="840.96" y="152.64" transform="rotate(-0 840.96 152.64)">Validation loss</text>
+  </g>
+  <g id="text_40">
+   <text style="font-weight: 700; font-size: 28px; font-family: 'Arial'; text-anchor: start; fill: #1f4b41" x="64.8" y="514.368" transform="rotate(-0 64.8 514.368)">24.8998 s</text>
+  </g>
+  <g id="text_41">
+   <text style="font-size: 12px; font-family: 'Arial'; text-anchor: start; fill: #66776d" x="64.8" y="538.56" transform="rotate(-0 64.8 538.56)">Mean training time  ·  0.071 s run-to-run range</text>
+  </g>
+  <g id="text_42">
+   <text style="font-weight: 700; font-size: 28px; font-family: 'Arial'; text-anchor: start; fill: #1f4b41" x="573.12" y="514.368" transform="rotate(-0 573.12 514.368)">3.27498</text>
+  </g>
+  <g id="text_43">
+   <text style="font-size: 12px; font-family: 'Arial'; text-anchor: start; fill: #66776d" x="573.12" y="538.56" transform="rotate(-0 573.12 538.56)">Mean final validation loss</text>
+  </g>
+  <g id="text_44">
+   <text style="font-weight: 700; font-size: 28px; font-family: 'Arial'; text-anchor: start; fill: #1f4b41" x="1016.64" y="514.368" transform="rotate(-0 1016.64 514.368)">5 of 5 pass</text>
+  </g>
+  <g id="text_45">
+   <text style="font-size: 12px; font-family: 'Arial'; text-anchor: start; fill: #66776d" x="1016.64" y="538.56" transform="rotate(-0 1016.64 538.56)">Every run: loss ≤ 3.28 and training time &lt; 25 s</text>
+  </g>
+  <g id="text_46">
+   <text style="font-size: 10.5px; font-family: 'Arial'; text-anchor: start; fill: #66776d" x="64.8" y="563.328" transform="rotate(-0 64.8 563.328)">Source: results/cohorts.json  ·  Measured 2026-09-22  ·  Training interval excludes compilation, warmup and validation.</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pb3731af2df">
+   <rect x="120.96" y="183.744" width="547.2" height="228.096" />
+  </clipPath>
+  <clipPath id="p8ed8a27ebf">
+   <rect x="840.96" y="183.744" width="540" height="228.096" />
+  </clipPath>
+ </defs>
+</svg>

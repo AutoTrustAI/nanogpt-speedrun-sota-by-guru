@@ -1,9 +1,15 @@
 {
-  "project": "ForgeMatch",
-  "experiment_attribution": "ScienceGuru + Guru Turbo 1.2",
+  "project": "ScienceGuru",
+  "organization": "AutoTrust",
+  "brand": "AutoTrust",
+  "experiment_attribution": "AutoTrust · ScienceGuru · Guru Turbo 1.2",
   "platform_label": "ScienceGuru",
+  "platform_role": "AutoTrust research platform",
   "model_label": "Guru Turbo 1.2",
-  "attribution_source": "Project owner instruction, 2026-09-23",
+  "model_role": "Model used for this research project",
+  "attribution_source": "Project owner confirmation in this conversation, 2026-09-25: AutoTrust is the team/brand; ScienceGuru is the research platform; Guru Turbo 1.2 is the model used. Use ScienceGuru as the project name.",
+  "organization_website": "https://autotrust.ai/",
+  "repository_url": "https://github.com/AutoTrustAI/nanogpt-speedrun-sota-by-guru",
   "benchmark_evidence": "benchmark-evidence.json",
   "source_authorship": "../CREDITS.md",
   "scope": "Project attribution; source hashes, runtime environment and measured result records are preserved separately."

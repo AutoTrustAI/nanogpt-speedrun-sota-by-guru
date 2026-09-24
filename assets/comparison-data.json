@@ -8,21 +8,21 @@
   "public_results": [
     {
       "method": "ANVIL2",
-      "affiliation": "Hyperstition",
+      "affiliation": "Hyperstition · Deven Pietrzak",
       "seconds": "39.914",
       "approximate": false,
       "source": "https://github.com/KellerJordan/modded-nanogpt/pull/360"
     },
     {
       "method": "Exact-match",
-      "affiliation": "hermabr",
+      "affiliation": "Herman Brunborg · Stanford",
       "seconds": "47.2056",
       "approximate": false,
       "source": "https://github.com/hermabr/modded-nanogpt-public/blob/3e92b0e28293dcb184197da1a0ce1f543e84f76c/records/track_1_short/2026-09-16_ExactMatch/this_pr/statistics.md"
     },
     {
-      "method": "Community reference",
-      "affiliation": "modded-nanogpt",
+      "method": "Official SOTA",
+      "affiliation": "Jan Varho · Canonical Token Masking",
       "seconds": "67.56",
       "approximate": true,
       "source_minutes": "1.126",
@@ -31,7 +31,7 @@
     },
     {
       "method": "Recursive",
-      "affiliation": "Recursive",
+      "affiliation": "Recursive · Cong Lu",
       "seconds": "75.36",
       "approximate": true,
       "source_minutes": "1.256",
