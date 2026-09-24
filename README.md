@@ -1,6 +1,6 @@
 **AUTOTRUST AI  ·  SCIENCEGURU  ·  RESEARCH**
 
-# ScienceGuru Cuts the NanoGPT Speedrun to 24.9 Seconds
+# New Record: ScienceGuru Cuts the NanoGPT Speedrun to 24.9 Seconds
 
 Running Guru Turbo 1.2, AutoTrust’s research platform trained GPT-2 Small to the 3.28 validation-loss target in 24.90 seconds on eight H100s: 2.71× faster than the current official record.
 

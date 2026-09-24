@@ -1,6 +1,6 @@
 **AUTOTRUST AI  ·  SCIENCEGURU  ·  研究**
 
-# ScienceGuru 将 NanoGPT Speedrun 缩短至 24.9 秒
+# New Record: ScienceGuru 将 NanoGPT Speedrun 缩短至 24.9 秒
 
 运行 Guru Turbo 1.2 的 AutoTrust 科研平台，在八张 H100 上用 24.90 秒将 GPT-2 Small 训练至 3.28 的验证损失目标：训练速度达到当前官方纪录的 2.71×。
 
